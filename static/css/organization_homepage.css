@@ -76,23 +76,7 @@ body {
   border-color: #e5e5e5;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-/* .navbar .dropdown-menu li a {
-  color: #777;
-  padding: 8px 20px;
-  line-height: normal;
-} */
-/* .navbar .dropdown-menu li a:hover,
-.navbar .dropdown-menu li a:focus {
-  color: #333 !important;
-  background: transparent !important;
-} */
-/* .navbar .nav .active a,
-.navbar .nav .active a:hover,
-.navbar .nav .active a:focus {
-  color: #fff;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
-  background: transparent !important;
-} */
+
 .navbar .nav .user-action {
   padding: 9px 15px;
 }
