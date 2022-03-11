@@ -1,0 +1,9 @@
+.qualification-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-footer {
+    background: rgb(57, 23, 160);
+    color: #fff;
+}
