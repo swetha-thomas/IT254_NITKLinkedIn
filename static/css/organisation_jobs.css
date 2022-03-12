@@ -26,19 +26,18 @@
 .buttons {
     display: inline-block;
 }
+
 .right-side {
-    display: inline-block;
+    float:right;
     width: 50%;
 }
 .jobs-posted {
-    display: inline-block;
     height: 400px;
     width: 100%;
     background-color: aqua;
 }
 
 .jobs-saved {
-    display: inline-block;
     height: 400px;
     background: red;
 }
