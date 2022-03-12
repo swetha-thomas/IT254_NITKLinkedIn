@@ -52,15 +52,17 @@
         </div>
     </nav>
 
-    <div class="create-button-container">
+    <div class="mb-3 ms-3 ps-2 pe-2 create-button">
         <button type="button" class="btn btn-primary">+ Create</button>
     </div>
 
-    <div class="create-job-post">
+    <div class="mt-2 create-job-post">
         <form action="" class="form-horizontal">
-            <h4 class="">Create a new Job Opening for NITK Students</h4><br>
+            <div class="">
+                <h4 class="ms-3 me-3">Create a new Job Opening for NITK Students</h4>
+            </div>
             
-            <div class="w-25 form-control ms-3 mb-4">
+            <div class="form-control mb-4">
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Job Type</option>
                     <option value="1">Internship (Full Time)</option>
@@ -70,37 +72,76 @@
                 </select>
             </div>
             
-            <div class="w-25 form-control ms-3 mt-4 mb-4">
-                <select class="form-select" aria-label="Default select example">
+            <div class="form-control mb-4">
+                <!-- <select class="form-select" aria-label="Default select example">
                     <option selected>Job Role</option>
                     <option value="1">Software Development Engineer (SDE)</option>
                     <option value="2">Digital Media & Content Strategist</option>
                     <option value="3">Business Analyst</option>
                     <option value="4">Product Manager</option>
-                    <!-- if other is selected, create span tag to fill in the job role -->
+                    if other is selected, create span tag to fill in the job role
                     <option value="5">Other</option> <span class="other"></span>
-                </select>
+                </select> -->
+
+                <label for="exampleDataList" class="form-label">Job Role</label>
+                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                <datalist id="datalistOptions">
+                    <option value="1">Software Development Engineer (SDE)</option>
+                    <option value="2">Digital Media & Content Strategist</option>
+                    <option value="3">Business Analyst</option>
+                    <option value="4">Product Manager</option>
+                </datalist>
             </div>
             
-            <div class="qualification-container form-control ms-3 w-25">
+            
+            <div class="qualification-container form-control">
                 <label for="" class="form-label">Qualification</label>
-                <input type="text" name="" id="" size="25" placeholder="Who can apply?">
+                <input type="text" class="form-control" name="" id="" placeholder="Who can apply?">
             </div>
 
-            <div class="w-50 form-control ms-3 mt-4 mb-4">
+            <div class="form-control mt-4 mb-4">
                 <label for="" class="form-label">Job Description</label>
                 <textarea rows="10" class="form-control" placeholder="About the Job"></textarea>    
             </div>
 
-            <div class="w-25 form-control ms-3 mt-4 mb-4">
+            <div class="form-control mt-4 mb-4">
                 <label for="" class="form-label">Skills Required</label>
                 <textarea name="" class="form-control" id="" cols="30" rows="5" placeholder="Mention the pre-requistes for the job"></textarea>
             </div>
-            
-            <footer class="page-footer">
-                Developed by: Advaith, Swetha &amp; Akheel ©
-            </footer>
-            </form>
+
+            <div class="buttons mb-4">
+                <div class="form-inline ms-3 me-3">
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+                <div class="form-inline ms-3">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </div>         
+        </form>
     </div>
+
+    <div class="right-side">
+        <div class="jobs-posted">
+            <h4 class="ms-3 me-3">Jobs Posted So far</h4><br>
+    
+            <div class="job1">
+    
+            </div>
+    
+            <div class="job2">
+    
+            </div>
+        </div>
+    
+        <div class="jobs-saved">
+            <h4>Jobs Saved, yet to be posted</h4>
+        </div>
+    </div>    
+
+    <footer class="page-footer">
+        Developed by: Advaith, Swetha &amp; Akheel ©
+    </footer>
+
+    
 </body>
 </html>
