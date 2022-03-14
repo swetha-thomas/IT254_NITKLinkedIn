@@ -1,0 +1,52 @@
+.qualification-container {
+    display: flex;
+    flex-direction: row wrap;
+}
+
+.page-footer {
+    background: rgb(57, 23, 160);
+    color: #fff;
+}
+
+.create-job-post {
+    display: inline-block;
+    width: 50%;
+    justify-content: space-evenly;
+}
+
+.form-horizontal {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.form-control {
+    border: 0;
+}
+
+.buttons {
+    display: inline-block;
+}
+
+.right-side {
+    float:right;
+    width: 50%;
+}
+.jobs-posted {
+    height: 400px;
+    width: 100%;
+    background-color: aqua;
+}
+
+.jobs-saved {
+    height: 400px;
+    background: red;
+}
+
+.create-button {
+    width: fit-content;
+}
+
+.form-heading {
+    width: fit-content;
+    padding-top: 1em;
+}
