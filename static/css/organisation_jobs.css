@@ -3,11 +3,6 @@
     flex-direction: row wrap;
 }
 
-.page-footer {
-    background: rgb(57, 23, 160);
-    color: #fff;
-}
-
 .create-job-post {
     display: inline-block;
     width: 50%;

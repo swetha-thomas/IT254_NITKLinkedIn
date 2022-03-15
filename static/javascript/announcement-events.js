@@ -9,13 +9,13 @@ $('.announcement-slider').slick({
     nextArrow: $('.next-arrow-announcement')
 });
 
-$('.events').slick({
+$('.timeline-slider').slick({
     dots: false,
     arrows: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     fade: true,
-    prevArrow: $('.prev-arrow-events'),
-    nextArrow: $('.next-arrow-events')
+    prevArrow: $('.prev-arrow-deadline'),
+    nextArrow: $('.next-arrow-deadline')
 });
