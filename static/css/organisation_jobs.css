@@ -69,13 +69,14 @@ a {
 .right-side {
     grid-column: 2 / -1;
     grid-row: 1 / -1;
-
+/* 
     display: flex;
-    flex-direction: column;
+    flex-direction: column; */
 }
 
 .jobs-posted {
     flex: 1;
+    overflow-y: auto;
 }
 .jobs-saved {
     flex: 1;

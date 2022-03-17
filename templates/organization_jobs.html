@@ -63,7 +63,7 @@
                 </div>
                 
                 <div class="form-control mb-4">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" required>
                         <option selected>Job Type</option>
                         <option value="1">Internship (Full Time)</option>
                         <option value="2">Internship (Part Time)</option>
@@ -84,7 +84,7 @@
                     </select> -->
 
                     <label for="exampleDataList" class="form-label">Job Role</label>
-                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
                     <datalist id="datalistOptions">
                         <option value="1">Software Development Engineer (SDE)</option>
                         <option value="2">Digital Media & Content Strategist</option>
@@ -95,144 +95,139 @@
 
                 <div class="qualification-container form-control">
                     <label for="" class="form-label">Qualification</label>
-                    <input type="text" class="form-control" name="" id="" placeholder="Who can apply?">
+                    <input type="text" class="form-control" name="" id="" placeholder="Who can apply?" required>
                 </div>
 
                 <div class="form-control mt-4 mb-4">
                     <label for="" class="form-label">Job Description</label>
-                    <textarea rows="10" class="form-control" placeholder="About the Job"></textarea>    
+                    <textarea rows="10" class="form-control" placeholder="About the Job" required></textarea>    
                 </div>
 
                 <div class="form-control mt-4 mb-4">
                     <label for="" class="form-label">Skills Required</label>
-                    <textarea name="" class="form-control" id="" cols="30" rows="5" placeholder="Mention the pre-requistes for the job"></textarea>
+                    <textarea name="" class="form-control" id="" cols="30" rows="5" placeholder="Mention the pre-requistes for the job" required></textarea>
                 </div>
 
                 <div class="buttons mb-4">
-                    <div class="form-inline ms-3 me-3">
-                        <button type="button" class="btn btn-primary" id="savebtn">Save</button>
-                    </div>
-                    <div class="form-inline ms-3">
-                        <button type="submit" class="btn btn-primary">Post</button>
-                    </div>
-                </div>         
+                    <button type="button" class="btn btn-primary ms-3 me-3" id="savebtn">Save Draft</button>
+                    <button type="submit" class="btn btn-primary ms-3">Post</button>
+                </div>
             </form>
         </div>
 
         <div class="right-side">
             <h4 class="ms-3 me-3">Jobs Posted So far</h4>
             <div class="overflow-auto jobs-posted">
-                <section>
-                    <ul class="job-list" style="list-style-type:none">
-                        <a href="">
-                            <li class="job">
-                                <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
-                                <div class="job-title-company-location">
-                                    <h5 class="job-title">Software Developer Engineer</h5>
-                                    <p class="job-company">Amazon Web Services India</p>
-                                    <p class="job-address">Bengluru, India</p>
-                                </div>
-                                
-                                <div class="job-button-group">
-                                    <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
-                                    <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
-                                    <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
-                                </div>
-                            </li>
-                        </a>
-                        <a href="">
-                            <li class="job">
-                                <img class="company-logo-img" src="../static/img/job-company-2.jpg" alt="">
-                                <div class="job-title-company-location">
-                                    <h5 class="job-title">Product Manager</h5>
-                                    <p class="job-company">Amazon Web Services India</p>
-                                    <p class="job-address">Bengluru, India</p>
-                                </div>
-                                
-                                <div class="job-button-group">
-                                    <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
-                                    <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
-                                    <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
-                                </div>
-                            </li>
-                        </a>
+                
+                <ul class="job-list" style="list-style-type:none">
+                    <a href="">
+                        <li class="job">
+                            <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
+                            <div class="job-title-company-location">
+                                <h5 class="job-title">Software Developer Engineer</h5>
+                                <p class="job-company">Amazon Web Services India</p>
+                                <p class="job-address">Bengluru, India</p>
+                            </div>
+                            
+                            <div class="job-button-group">
+                                <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
+                                <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
+                                <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
+                            </div>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="job">
+                            <img class="company-logo-img" src="../static/img/job-company-2.jpg" alt="">
+                            <div class="job-title-company-location">
+                                <h5 class="job-title">Product Manager</h5>
+                                <p class="job-company">Amazon Web Services India</p>
+                                <p class="job-address">Bengluru, India</p>
+                            </div>
+                            
+                            <div class="job-button-group">
+                                <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
+                                <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
+                                <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
+                            </div>
+                        </li>
+                    </a>
 
-                        <a href="">
-                            <li class="job">
-                                <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
-                                <div class="job-title-company-location">
-                                    <h5 class="job-title">Technical Analyst</h5>
-                                    <p class="job-company">Amazon Web Services India</p>
-                                    <p class="job-address">Bengluru, Karnataka</p>
-                                </div>
-                                
-                                <div class="job-button-group">
-                                    <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
-                                    <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
-                                    <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
-                                </div>
-                            </li>
-                        </a>
+                    <a href="">
+                        <li class="job">
+                            <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
+                            <div class="job-title-company-location">
+                                <h5 class="job-title">Technical Analyst</h5>
+                                <p class="job-company">Amazon Web Services India</p>
+                                <p class="job-address">Bengluru, Karnataka</p>
+                            </div>
+                            
+                            <div class="job-button-group">
+                                <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
+                                <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
+                                <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
+                            </div>
+                        </li>
+                    </a>
 
-                        <a href="">
-                            <li class="job">
-                                <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
-                                <div class="job-title-company-location">
-                                    <h5 class="job-title">Business Anaylyst</h5>
-                                    <p class="job-company">Amazon Web Services India</p>
-                                    <p class="job-address">Chennai, Tamil Nadu</p>
-                                </div>
-                                
-                                <div class="job-button-group">
-                                    <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
-                                    <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
-                                    <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
-                                </div>
-                            </li>    
-                        </a>
+                    <a href="">
+                        <li class="job">
+                            <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
+                            <div class="job-title-company-location">
+                                <h5 class="job-title">Business Anaylyst</h5>
+                                <p class="job-company">Amazon Web Services India</p>
+                                <p class="job-address">Chennai, Tamil Nadu</p>
+                            </div>
+                            
+                            <div class="job-button-group">
+                                <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
+                                <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
+                                <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
+                            </div>
+                        </li>    
+                    </a>
 
-                        <a href="">
-                            <li class="job">
-                                <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
-                                <div class="job-title-company-location">
-                                    <h5 class="job-title">Software Developer Engineer</h5>
-                                    <p class="job-company">Amazon Web Services India</p>
-                                    <p class="job-address">Bengluru, India</p>
-                                </div>
-                                
-                                <div class="job-button-group">
-                                    <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
-                                    <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
-                                    <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
-                                </div>
-                            </li>
-                        </a>
-                        <a href="">
-                            <li class="job">
-                                <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
-                                <div class="job-title-company-location">
-                                    <h5 class="job-title">Graphic Designer</h5>
-                                    <p class="job-company">Amazon Web Services India</p>
-                                    <p class="job-address">Bengluru, India</p>
-                                </div>
-                                
-                                <div class="job-button-group">
-                                    <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
-                                    <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
-                                    <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
-                                </div>
-                            </li>
-                        </a>
-                    </ul>
-                </section>
+                    <a href="">
+                        <li class="job">
+                            <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
+                            <div class="job-title-company-location">
+                                <h5 class="job-title">Software Developer Engineer</h5>
+                                <p class="job-company">Amazon Web Services India</p>
+                                <p class="job-address">Bengluru, India</p>
+                            </div>
+                            
+                            <div class="job-button-group">
+                                <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
+                                <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
+                                <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
+                            </div>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="job">
+                            <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
+                            <div class="job-title-company-location">
+                                <h5 class="job-title">Graphic Designer</h5>
+                                <p class="job-company">Amazon Web Services India</p>
+                                <p class="job-address">Bengluru, India</p>
+                            </div>
+                            
+                            <div class="job-button-group">
+                                <button type='button' id='{0}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button> 
+                                <button type='button' id='{1}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
+                                <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
+                            </div>
+                        </li>
+                    </a>
+                </ul>
             </div>
             
             <h4 class="ms-3 me-3">Jobs Saved and not posted yet</h4>
             <div class="overflow-auto jobs-saved">
-                <section class="overflow-auto">
+                
                     <ul class="job-list" id="list-of-saved-jobs" style="list-style-type:none">
                         
-                        <li class="job">
+                        <li class="job" id="job1test">
                             <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
                             <div class="job-title-company-location">
                                 <h5 class="job-title">Software Developer Engineer</h5>
@@ -260,9 +255,7 @@
                                 <button type='button' id='{2}' onClick='delete_row(this.id)' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button> 
                             </div>
                         </li>
-
                     </ul>
-                </section>
                
             </div>
         </div>

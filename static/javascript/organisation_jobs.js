@@ -3,10 +3,15 @@ const targetDiv = document.getElementById("left-side");
 const createBtn = document.getElementById("create-new-job-btn");
 const saveBtn = document.getElementById("savebtn");
 
+function validateForm(params) {
+    // document.querySelector(".form-horizontal .form-control").childNodes[0].
+}
 createBtn.addEventListener('click', function() {
     targetDiv.style.display = "block";
 });
 saveBtn.addEventListener('click', function() {
+
+    validateForm();
         
     var ul = document.getElementById("list-of-saved-jobs");
     var li = document.createElement("li");
@@ -57,3 +62,24 @@ saveBtn.addEventListener('click', function() {
     
     ul.appendChild(li);
 });
+
+let deleteBtn = document.querySelectorAll(".delete");
+for(let i=0; i<deleteBtn.length; i++) {
+    document.querySelectorAll(".delete")[i].addEventListener('click', (event) => {
+        document.querySelectorAll(".job")[i].remove();
+    });
+}
+
+let editBtn = document.querySelectorAll(".pencil");
+for(let i=0; i<editBtn.length; i++) {
+    document.querySelectorAll(".pencil")[i].addEventListener('click', (event) => {
+        document.getElementById("left-side").style.display = "block";
+    });
+}
+
+let viewBtn = document.querySelectorAll(".right-side a");
+for(let i=0; i<viewBtn.length; i++) {
+    document.querySelectorAll(".right-side a")[i].addEventListener('click', () => {
+        document.getElementById("left-side").style.display = "block";
+    });
+}
