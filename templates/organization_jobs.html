@@ -30,7 +30,7 @@
 
             <div id="navbarSupportedContent" class="collapse navbar-collapse">		
                 <ul class="nav navbar-nav">
-                    <li><a class="active nav-link" href="organization_homepage.html"><i class="fa fa-home"></i>Dashboard</a></li>
+                    <li><a class="active nav-link" href="organization_home.html"><i class="fa fa-home"></i>Dashboard</a></li>
                     <!-- <li><a class="active nav-link" href="student_connect.html"><i class="fa fa-users"></i>Recruit</a></li> -->
                 </ul>
             </div>
@@ -61,14 +61,16 @@
                 <div class="">
                     <h4 class="ms-3 me-3">Create a new Job Opening for NITK Students</h4>
                 </div>
+
+                <span class="ms-3 me-3" id="invalid-input"></span>
                 
                 <div class="form-control mb-4">
-                    <select class="form-select" aria-label="Default select example" required>
-                        <option selected>Job Type</option>
-                        <option value="1">Internship (Full Time)</option>
-                        <option value="2">Internship (Part Time)</option>
-                        <option value="3">Job (Full Time)</option>
-                        <option value="4">Job (Part Time)</option>
+                    <select id="job-type" class="form-select" aria-label="Default select example" required>
+                        <option selected value="Job Type">Job Type</option>
+                        <option value="Internship (Full Time)">Internship (Full Time)</option>
+                        <option value="Internship (Part Time)">Internship (Part Time)</option>
+                        <option value="Job (Full Time)">Job (Full Time)</option>
+                        <option value="Job (Part Time)">Job (Part Time)</option>
                     </select>
                 </div>
                 
@@ -84,42 +86,49 @@
                     </select> -->
 
                     <label for="exampleDataList" class="form-label">Job Role</label>
-                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
+                    <input type="text" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
                     <datalist id="datalistOptions">
-                        <option value="1">Software Development Engineer (SDE)</option>
-                        <option value="2">Digital Media & Content Strategist</option>
-                        <option value="3">Business Analyst</option>
-                        <option value="4">Product Manager</option>
+                        <option value="Software Development Engineer (SDE)">Software Development Engineer (SDE)</option>
+                        <option value="Digital Media & Content Strategist">Digital Media & Content Strategist</option>
+                        <option value="Business Analyst">Business Analyst</option>
+                        <option value="Product Manager">Product Manager</option>
                     </datalist>
                 </div>
 
                 <div class="qualification-container form-control">
-                    <label for="" class="form-label">Qualification</label>
-                    <input type="text" class="form-control" name="" id="" placeholder="Who can apply?" required>
+                    <label for="qualification" class="form-label">Qualification</label>
+                    <input type="text" class="form-control" name="qualification" id="qualification" placeholder="Who can apply?" required>
+                </div>
+
+                <div class="form-control mt-4">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" name="location" id="location" placeholder="Location" required>
                 </div>
 
                 <div class="form-control mt-4 mb-4">
-                    <label for="" class="form-label">Job Description</label>
-                    <textarea rows="10" class="form-control" placeholder="About the Job" required></textarea>    
+                    <label for="job-desc" class="form-label">Job Description</label>
+                    <textarea id="job-desc" rows="10" class="form-control" placeholder="About the Job" required></textarea>    
                 </div>
 
+                
+
                 <div class="form-control mt-4 mb-4">
-                    <label for="" class="form-label">Skills Required</label>
-                    <textarea name="" class="form-control" id="" cols="30" rows="5" placeholder="Mention the pre-requistes for the job" required></textarea>
+                    <label for="skills-required" class="form-label">Skills Required</label>
+                    <textarea name="" class="form-control" id="skills-required" cols="30" rows="5" placeholder="Mention the pre-requistes for the job" required></textarea>
                 </div>
 
                 <div class="buttons mb-4">
                     <button type="button" class="btn btn-primary ms-3 me-3" id="savebtn">Save Draft</button>
-                    <button type="submit" class="btn btn-primary ms-3">Post</button>
+                    <button type="button" class="btn btn-primary ms-3" id="postbtn">Post</button>
                 </div>
             </form>
         </div>
 
         <div class="right-side">
             <h4 class="ms-3 me-3">Jobs Posted So far</h4>
-            <div class="overflow-auto jobs-posted">
+            <div class="jobs-posted">
                 
-                <ul class="job-list" style="list-style-type:none">
+                <ul id="list-of-posted-jobs" class="job-list" style="list-style-type:none">
                     <a href="">
                         <li class="job">
                             <img class="company-logo-img" src="../static/img/job-company-1.jpg" alt="">
@@ -223,7 +232,7 @@
             </div>
             
             <h4 class="ms-3 me-3">Jobs Saved and not posted yet</h4>
-            <div class="overflow-auto jobs-saved">
+            <div class="jobs-saved">
                 
                     <ul class="job-list" id="list-of-saved-jobs" style="list-style-type:none">
                         
