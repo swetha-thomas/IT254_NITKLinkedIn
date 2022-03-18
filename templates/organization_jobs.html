@@ -30,7 +30,7 @@
 
             <div id="navbarSupportedContent" class="collapse navbar-collapse">		
                 <ul class="nav navbar-nav">
-                    <li><a class="active nav-link" href="organization_home.html"><i class="fa fa-home"></i>Dashboard</a></li>
+                    <li><a class="active nav-link" href="organization_home.html"><i class="fa fa-home"></i>Home</a></li>
                     <!-- <li><a class="active nav-link" href="student_connect.html"><i class="fa fa-users"></i>Recruit</a></li> -->
                 </ul>
             </div>
@@ -43,7 +43,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <!-- <li><a href="organization_homepage.html"><i class="fa fa-user-o"></i>Profile</a></li>
                         <li><hr class="dropdown-divider"></li> -->
-                        <li><a href="#"><i class="material-icons">&#xE8AC;</i>Logout</a></li>
+                        <li><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </ul>
                     </li>
                 </ul>
@@ -61,16 +61,14 @@
                 <div class="">
                     <h4 class="ms-3 me-3">Create a new Job Opening for NITK Students</h4>
                 </div>
-
-                <span class="ms-3 me-3" id="invalid-input"></span>
                 
                 <div class="form-control mb-4">
-                    <select id="job-type" class="form-select" aria-label="Default select example" required>
-                        <option selected value="Job Type">Job Type</option>
-                        <option value="Internship (Full Time)">Internship (Full Time)</option>
-                        <option value="Internship (Part Time)">Internship (Part Time)</option>
-                        <option value="Job (Full Time)">Job (Full Time)</option>
-                        <option value="Job (Part Time)">Job (Part Time)</option>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Job Type</option>
+                        <option value="1">Internship (Full Time)</option>
+                        <option value="2">Internship (Part Time)</option>
+                        <option value="3">Job (Full Time)</option>
+                        <option value="4">Job (Part Time)</option>
                     </select>
                 </div>
                 
@@ -84,38 +82,33 @@
                         if other is selected, create span tag to fill in the job role
                         <option value="5">Other</option> <span class="other"></span>
                     </select> -->
-
+    
                     <label for="exampleDataList" class="form-label">Job Role</label>
-                    <input type="text" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
+                    <input style="border:solid 1px rgba(0, 0, 0, 0.29);" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
                     <datalist id="datalistOptions">
-                        <option value="Software Development Engineer (SDE)">Software Development Engineer (SDE)</option>
-                        <option value="Digital Media & Content Strategist">Digital Media & Content Strategist</option>
-                        <option value="Business Analyst">Business Analyst</option>
-                        <option value="Product Manager">Product Manager</option>
+                        <option data-value="1">Software Development Engineer (SDE)</option>
+                        <option data-value="2">Digital Media & Content Strategist</option>
+                        <option data-value="3">Business Analyst</option>
+                        <option data-value="4">Product Manager</option>
                     </datalist>
                 </div>
-
-                <div class="qualification-container form-control">
-                    <label for="qualification" class="form-label">Qualification</label>
-                    <input type="text" class="form-control" name="qualification" id="qualification" placeholder="Who can apply?" required>
-                </div>
-
-                <div class="form-control mt-4">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" name="location" id="location" placeholder="Location" required>
-                </div>
-
-                <div class="form-control mt-4 mb-4">
-                    <label for="job-desc" class="form-label">Job Description</label>
-                    <textarea id="job-desc" rows="10" class="form-control" placeholder="About the Job" required></textarea>    
-                </div>
-
                 
-
-                <div class="form-control mt-4 mb-4">
-                    <label for="skills-required" class="form-label">Skills Required</label>
-                    <textarea name="" class="form-control" id="skills-required" cols="30" rows="5" placeholder="Mention the pre-requistes for the job" required></textarea>
+                
+                <div class="qualification-container form-control">
+                    <label for="" class="form-label">Qualification</label>
+                    <input style="border:solid 1px rgba(0, 0, 0, 0.29);" type="text" class="form-control" name="" id="" placeholder="Who can apply?">
                 </div>
+    
+                <div class="form-control mt-4 mb-4">
+                    <label for="" class="form-label">Job Description</label>
+                    <textarea style="border:solid 1px rgba(0, 0, 0, 0.29);" rows="10" class="form-control" placeholder="About the Job"></textarea>    
+                </div>
+    
+                <div class="form-control mt-2 mb-4">
+                    <label for="" class="form-label">Skills Required</label>
+                    <textarea style="border:solid 1px rgba(0, 0, 0, 0.29);" name="" class="form-control" id="" cols="30" rows="5" placeholder="Mention the pre-requistes for the job"></textarea>
+                </div>
+    
 
                 <div class="buttons mb-4">
                     <button type="button" class="btn btn-primary ms-3 me-3" id="savebtn">Save Draft</button>

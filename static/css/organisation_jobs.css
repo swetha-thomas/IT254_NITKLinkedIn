@@ -1,7 +1,3 @@
-.qualification-container {
-    display: flex;
-    flex-direction: row wrap;
-}
 
 .create-job-post {
     display: inline-block;
