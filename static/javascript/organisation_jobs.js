@@ -102,7 +102,7 @@ postBtn.addEventListener('click', (event) => {
 
     }
     else {
-        document.getElementById("invalid-input").innerHTML = "";
+        document.getElementById("invalid-input").innerHTML = "Invalid Input!";
         document.getElementById("invalid-input").style.color = 'red';
     } 
 });
@@ -110,7 +110,7 @@ postBtn.addEventListener('click', (event) => {
 saveBtn.addEventListener('click', function() {
 
     if(validateForm()) {
-        document.getElementById("invalid-input").innerHTML = "Invalid Input";
+        document.getElementById("invalid-input").innerHTML = "";
         var ddl = document.querySelector('#job-type');
         var selectedValue = ddl.options[ddl.selectedIndex].value;
         var jobRole = document.getElementById("exampleDataList").value;
