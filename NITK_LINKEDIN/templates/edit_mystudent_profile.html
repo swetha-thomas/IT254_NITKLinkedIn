@@ -1,0 +1,430 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Edit Profile</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+      <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <!--Navigation bar-->
+    <nav class="navbar navbar-expand-xl navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand"><i class="fa fa-cube"></i>NITK<b> Linkedin</b></a> 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">		
+          <ul class="nav navbar-nav ">
+            <li><a class="active nav-link" href="{% url 'studentHome' %}"><i class="fa fa-home"></i> Home</a></li>
+            <!-- <li><a class="active nav-link" href="student_connect.html"><i class="fa fa-users"></i> Connect</a></li> -->
+            <li><a class="active nav-link" href="{% url 'studentJobs' %}"><i class="fa fa-briefcase"></i> Get Hired</a></li>
+          </ul>
+        </div>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-end">		
+          <ul class="nav">
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'img/user_pic.jpeg' %}" class="avatar" alt="Avatar"> {{name}} <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="{% url 'studentProfile' %}"><i class="fa fa-user-o"></i>Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--Left side-->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="d-flex flex-column align-items-center text-center"><img class="border rounded-circle mt-5" width="100%" src="{% static 'img/user_pic.jpeg' %}">
+            <span class="font-weight-bold"><br>{{name}}</span>
+            <span class="text-black-50">{{email}}</span>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="p-3 py-2">
+            <div class="d-flex mb-3">
+              <h4>My Profile</h4>
+            </div>
+            <div class="col-md-9">
+              <label class="labels">Name</label>
+              <input type="text" class="form-control" placeholder="Name" value={{name}} required>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-4">
+                <label class="labels">Gender</label><br>
+                <input type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label> 
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label><br><br>
+              </div>
+              <div class="col-md-5">
+                <label class="labels">Date of Birth</label><br>
+                <input type="date" id="dob" name="dob" class="form-control"><br>
+              </div>
+              <div class="col-md-9">
+                <label class="labels">Roll Number</label>
+                <input type="text" class="form-control" placeholder="Enter roll number" value="" required><br>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Branch</label><br>
+                <select name="branch" id="branch" class="form-select">
+                  <option selected="true" disabled="true">--Please select your branch--</option>
+                  <option value="Chemical Engineering">Chemical Engineering</option>
+                  <option value="Civil Engineering">Civil Engineering</option>
+                  <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                  <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+                  <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Mechanical Engineering">Mechanical Engineering</option>
+                  <option value="Metallurgical and Materials Engineering">Metallurgical and Materials Engineering</option>
+                  <option value="Mining Engineering">Mining Engineering</option>
+                </select>        
+                <br>
+              </div>
+              <div class="col-md-6">
+                <label class="labels">Current Semester</label>
+                <input type="number" class="form-control" placeholder="Enter Semester" value="">
+              </div>
+              <div class="col-md-6">
+                <label class="labels">CGPA</label>
+                <input type="number" class="form-control" placeholder="Enter CGPA" value=""><br>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Email ID</label>
+                <input type="email" class="form-control" placeholder="Enter email id" value={{email}} required><br>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Mobile Number</label>
+                <input type="tel" class="form-control" placeholder="Enter mobile number" value="" required>
+              </div>
+            </div> 
+            <br>
+            <label class="labels">About Me</label>
+            <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 100%;" placeholder="Brief Description about Yourself"></textarea>
+            <div class="mt-5 text-center">
+              <button class="btn btn-primary profile-button" type="button">Save Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!--Right side-->
+        <div class="col-md-5">
+          <div class="p-3 py-5">
+
+            <!--Work Experience-->
+            <div style="border-style: solid; border-color: lightgrey; padding:25px;">
+              <div class="d-flex justify-content-between align-items-center ">
+                <span>Edit Work Experience</span>
+                <span>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_exp">
+                    <i class="fa fa-plus"></i>&nbsp;Work Experience
+                  </button>
+                </span>
+              </div>
+              <!-- Modal -->
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal fade" id="modal_exp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Work Experience</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Role: <input type="text"><br><br>
+                      Company: <input type="text"><br><br>
+                      Location: <input type="text"><br><br>
+                      Employment Type: <input type="text"><br><br>
+                      Start Date: <input type="date"><br><br>
+                      End Date: <input type="date">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button id="expbutton" onclick="myFunction_experience();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Work Experience</button>
+              <div id="experience" style="display: none">
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{role}}</span>
+                    <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{role}}</span>
+                    <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3 ">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{role}}</span>
+                    <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>
+                </div>          
+              </div>      
+            </div>
+            <br><br>
+            
+            <!--Clubs-->
+            <div style="border-style: solid; border-color: lightgrey; padding:25px;">
+              <div class="d-flex justify-content-between align-items-center ">
+                <span>Edit Clubs</span>
+                <span>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_club">
+                    <i class="fa fa-plus"></i>&nbsp;Club</span>
+                  </button>
+                </span>
+              </div>      
+              <!-- Modal -->
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal fade" id="modal_club" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Club</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Role: <input type="text"><br><br>
+                      Club Name: <input type="text"><br><br>
+                      Start Date: <input type="date"><br><br>
+                      End Date: <input type="date">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+                        
+              <button id="clubbutton" onclick="myFunction_club();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Clubs</button>
+              <div id="club" style="display: None;">
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{role}}</span>
+                    <span class="d-block text-black-50 labels">{{club_name}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>                        
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{role}}</span>
+                    <span class="d-block text-black-50 labels">{{club_name}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>                        
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{role}}</span>
+                    <span class="d-block text-black-50 labels">{{club_name}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>                        
+                </div>
+              </div>
+            </div>
+            <br><br>
+
+            <!--Skills-->
+            <div style="border-style: solid; border-color: lightgrey; padding:25px;">
+              <div class="d-flex justify-content-between align-items-center ">
+                <span>Edit Skills</span>
+                <span>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_skills">
+                    <i class="fa fa-plus"></i>&nbsp;Skill
+                  </button>
+                </span>
+              </div>
+              <!-- Modal -->
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal fade" id="modal_skills" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Skill: <input type="text"><br><br>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button id="skillbutton" onclick="myFunction_skills();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Skills</button>
+              <div id="skill" style="display: None;">
+                <div class="d-flex flex-row mt-3">
+                    <div class="ml-1">
+                      <span class="font-weight-bold d-block">{{skill}}</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{skill}}</span>
+                  </div>
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{skill}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br><br>
+
+            <!--Education-->
+            <div style="border-style: solid; border-color: lightgrey; padding:25px;">
+              <div class="d-flex justify-content-between align-items-center ">
+                <span>Edit Education</span>
+                <span>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_edu">
+                    <i class="fa fa-plus"></i>&nbsp;Education</span>
+                  </button>
+                </span>
+              </div>
+              <!-- Modal -->
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal fade" id="modal_edu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Institute: <input type="text"><br><br>
+                      Degree: <input type="text"><br><br>
+                      Start Date: <input type="date"><br><br>
+                      End Date: <input type="date">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>                       
+              <button id="edubutton" onclick="myFunction_edu();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Education</button>
+              <div id="edu" style="display: None;">
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{institute}}</span>
+                    <span class="d-block text-black-50 labels">{{degree}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>
+                </div>                        
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{institute}}</span>
+                    <span class="d-block text-black-50 labels">{{degree}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>
+                </div> 
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{institute}}</span>
+                    <span class="d-block text-black-50 labels">{{degree}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>
+                </div> 
+              </div>
+            </div>  
+            <br><br> 
+            
+            <!--Courses & Certifications-->
+            <div style="border-style: solid; border-color: lightgrey; padding:25px;">
+              <div class="d-flex justify-content-between align-items-center ">
+                <span>Edit Courses and Certifications</span>
+                <span>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_courses">
+                    <i class="fa fa-plus"></i>&nbsp;Courses and Certifications</span>
+                  </button>
+                </span>
+              </div>
+                                
+              <!-- Modal -->
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal fade" id="modal_courses" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Courses and Certifications</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Name: <input type="text"><br><br>
+                      Organization/Institute: <input type="text"><br><br>
+                      Start Date: <input type="date"><br><br>
+                      End Date: <input type="date">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>  
+                </div>
+              </div>              
+              <button id="course_button" onclick="myFunction_courses();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Courses and Certifications</button>
+              <div id="course" style="display: None;">
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{name}}</span>
+                    <span class="d-block text-black-50 labels">{{org_inst}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>                        
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{name}}</span>
+                    <span class="d-block text-black-50 labels">{{org_inst}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>                        
+                </div>
+                <hr>
+                <div class="d-flex flex-row mt-3">
+                  <div class="ml-1">
+                    <span class="font-weight-bold d-block">{{name}}</span>
+                    <span class="d-block text-black-50 labels">{{org_inst}}</span>
+                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                  </div>                        
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>              
+      </div>
+    </div>
+  </body>
+  <footer class="page-footer">
+    Developed by: Advaith, Swetha &amp; Akheel ©
+  </footer>
+  <script src="../static/javascript/edit_profile.js"></script>
+</html>                            

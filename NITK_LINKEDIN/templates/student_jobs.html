@@ -1,0 +1,569 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+
+    <!-- Bootstrap link -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- navbar dropdown trying
+    <link 
+      rel="stylesheet" 
+      type="text/css" 
+      href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    /> -->
+
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/student_jobs.css' %}" />
+
+    <!-- font-awesome -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Jobs</title>
+  </head>
+  <body>
+    <!--Navigation bar-->
+    <nav class="navbar navbar-expand-xl navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand"
+          ><i class="fa fa-cube"></i>NITK<b> Linkedin</b></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a class="active nav-link" href="{% url 'studentHome' %}"
+                ><i class="fa fa-home"></i> Home</a
+              >
+            </li>
+            <!-- <li><a class="active nav-link" href="student_connect.html"><i class="fa fa-users"></i> Connect</a></li> -->
+            <li>
+              <a class="active nav-link" href="{% url 'studentJobs' %}"
+                ><i class="fa fa-briefcase"></i> Get Hired</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          id="navbarSupportedContent"
+          class="collapse navbar-collapse justify-content-end"
+        >
+          <ul class="nav">
+            <li class="nav-item dropdown active">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="{% static 'img/user_pic.jpeg' %}"
+                  class="avatar"
+                  alt="Avatar"
+                />
+                {{name}} <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a href="{% url 'studentProfile' %}"
+                    ><i class="fa fa-user-o"></i>Profile</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a href="{% url 'logout' %}"
+                    ><i class="fa fa-sign-out"></i>Logout</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main">
+      <header class="header-filter">
+        <ul class="filter">
+          <li class="filter-parameter btn-group">
+            <button
+              type="button"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Date Posted
+            </button>
+            <ul class="dropdown-menu">
+              <li class="filter-value">
+                <input
+                  class="dropdown-item radio-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios1"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleRadios1">
+                  Any Time
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  class="dropdown-item radio-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios2"
+                  value="option2"
+                />
+                <label class="dropdown-item label" for="exampleRadios2">
+                  Past Month
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  class="dropdown-item radio-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios3"
+                  value="option3"
+                />
+                <label class="dropdown-item label" for="exampleRadios3">
+                  Past Week
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  class="dropdown-item radio-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios4"
+                  value="option4"
+                />
+                <label class="dropdown-item label" for="exampleRadios4">
+                  Past 24 Hours
+                </label>
+              </li>
+            </ul>
+          </li>
+          <li class="filter-parameter btn-group">
+            <button
+              type="button"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Experience Level
+            </button>
+            <ul class="dropdown-menu">
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck1"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck1">
+                  Internship
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck2"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck2">
+                  Entry Level
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck3"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck3">
+                  Mid-Senior Level
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck4"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck4">
+                  Director
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck5"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck5">
+                  Executive
+                </label>
+              </li>
+            </ul>
+          </li>
+          <li class="filter-parameter btn-group">
+            <button
+              type="button"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Company
+            </button>
+            <ul class="dropdown-menu company-menu">
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck1"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck1">
+                  Amazon
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck2"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck2">
+                  Google
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck3"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck3">
+                  Facebook
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck4"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck4">
+                  Netflix
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="exampleCheck5"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="exampleCheck5">
+                  Apple
+                </label>
+              </li>
+            </ul>
+          </li>
+          <li class="filter-parameter btn-group">
+            <button
+              type="button"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Job Type
+            </button>
+            <ul class="dropdown-menu">
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="Part-Time-Check"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="Part-Time-Check">
+                  Part-Time
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="Full-Time-Check"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="Full-Time-Check">
+                  Full-Time
+                </label>
+              </li>
+            </ul>
+          </li>
+          <li class="filter-parameter btn-group">
+            <button
+              type="button"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              On-Site / Remote
+            </button>
+            <ul class="dropdown-menu">
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="On-Site-Check"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="On-Site-Check">
+                  On-Site
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="Remote-Check"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="Remote-Check">
+                  Remote
+                </label>
+              </li>
+              <li class="filter-value">
+                <input
+                  type="checkbox"
+                  class="check-input"
+                  name="exampleChecks"
+                  id="Hybrid-Check"
+                  value="option1"
+                />
+                <label class="dropdown-item label" for="Hybrid-Check">
+                  Hybrid
+                </label>
+              </li>
+            </ul>
+          </li>
+          </li>
+        </ul>
+      </header>
+
+      <section class="main-section flex-container">
+        <div class="job-list-col">
+          <ul class="job-list">
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Sr Solutions Architect - Egypt</div>
+                  <div class="job-company">Amazon Web Services (AWS)</div>
+                  <div class="job-address">Manama, Capital Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-2.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Data Center Technician Intern</div>
+                  <div class="job-company">Amazon</div>
+                  <div class="job-address">Durrat Al Bahrain, Southern Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Sr Solutions Architect - Egypt</div>
+                  <div class="job-company">Amazon Web Services (AWS)</div>
+                  <div class="job-address">Manama, Capital Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-2.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Data Center Technician Intern</div>
+                  <div class="job-company">Amazon</div>
+                  <div class="job-address">Durrat Al Bahrain, Southern Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Sr Solutions Architect - Egypt</div>
+                  <div class="job-company">Amazon Web Services (AWS)</div>
+                  <div class="job-address">Manama, Capital Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-2.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Data Center Technician Intern</div>
+                  <div class="job-company">Amazon</div>
+                  <div class="job-address">Durrat Al Bahrain, Southern Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Sr Solutions Architect - Egypt</div>
+                  <div class="job-company">Amazon Web Services (AWS)</div>
+                  <div class="job-address">Manama, Capital Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+            <li class="job">
+              <a href="">
+                <img class="job-company-img" src="{% static 'img/job-company-2.jpg' %}" alt="">
+                <div class="job-mini-details">
+                  <div class="job-title">Data Center Technician Intern</div>
+                  <div class="job-company">Amazon</div>
+                  <div class="job-address">Durrat Al Bahrain, Southern Governorate, Bahrain</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="job-desc-col">
+          <article class="job-desc">
+            <header class="job-desc-top">
+              <div class="job-desc-title">
+                Sr Solutions Architect - Egypt
+              </div>
+              <div class="job-desc-company">
+                Amazon Web Services (AWS)
+              </div>
+              <div class="job-desc-address">
+                Manama, Capital Governorate, Bahrain
+              </div>
+              <div class="job-desc-time">
+                2 weeks ago
+              </div>
+            </header>
+            <ul class="job-desc-points">
+              <li class="job-type">
+                <i class="fa fa-solid fa-suitcase"></i>
+                <span>
+                  Full-time · Mid-Senior level</li>
+                </span>
+              <li class="job-employees-num">
+                <i class="fa fa-solid fa-building"></i>
+                <span>
+                  10,001+ employees · IT Services and IT Consulting</li>
+                </span>
+              <li class="job-college-allumini">
+                <i class="fa fa-solid fa-users"></i>
+                <span>
+                  95 college alumni
+                </span>
+              </li>
+            </ul>
+
+            <a href="" class="job-site-button">  Go To Site <i class="fa fa-solid fa-link"></i></a>
+
+            <article class="job-desc-summary">
+              <p class="description-text">description</p>
+              <p class="job-summary">Amazon Web Services (AWS) is looking for a Senior Solutions Architect to join our thriving technical community and growing business in Egypt as part of the EMEA Public Sector team. You will join a friendly and supportive team, working together to bring the latest in disruptive cloud computing technologies to organisations serving our Public Sector customers, including: government agencies, state-owned companies, educational institutions, healthcare and non-profit organisations. Our Public Sector teams help customers build a deeper understanding of hyper-scale cloud technology and application architectures, and they have the consultative and leadership skills required to drive deliver successful outcomes.</p>
+            </article>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bootstrap Scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
