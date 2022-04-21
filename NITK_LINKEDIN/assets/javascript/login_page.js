@@ -33,16 +33,16 @@ function validateInput() {
   }
   return true;
 }
-var signinBtn = document.getElementById("signin");
-signinBtn.addEventListener("click", () => {
-  if (student.checked) {
-    location.href = "student_home.html";
-  } else {
-    location.href = "organization_home.html";
-  }
-  //   if (validateInput()) {
-  //     if (student.checked)
-  //       signinBtn.onclick = "location.href = 'www.youtube.com';";
-  //     else signinBtn.onclick = "organization_home.html";
-  //   }
-});
+// var signinBtn = document.getElementById("signin");
+// signinBtn.addEventListener("click", () => {
+//   if (student.checked) {
+//     location.href = "{% url 'studentHome' %}";
+//   } else {
+//     location.href = "{% url 'organizationHome' %}";
+//   }
+//   //   if (validateInput()) {
+//   //     if (student.checked)
+//   //       signinBtn.onclick = "location.href = 'www.youtube.com';";
+//   //     else signinBtn.onclick = "organization_home.html";
+//   //   }
+// });
