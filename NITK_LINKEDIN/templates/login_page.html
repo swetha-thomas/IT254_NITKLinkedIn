@@ -73,6 +73,7 @@
             placeholder="Email address"
             required
             aria-required="true"
+            name="email"
           />
           <!-- pattern="^[a-z][a-z]+\.[0-9]{3}[a-z]{2}[0-9]{3}@nitk\.edu\.in$" -->
         </div>
@@ -84,6 +85,7 @@
             placeholder="Password"
             required
             aria-required="true"
+            name="password"
           />
           <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,20})" -->
         </div>
@@ -101,6 +103,9 @@
           <a href="{% url 'register' %}">Register</a>
         </div>
       </form>
+      {% for message in messages %}
+      <h3>{{message}}</h3>
+      {% endfor %}
     </div>
     <script src="{% static 'javascript/login_page.js' %}"></script>
   </body>
