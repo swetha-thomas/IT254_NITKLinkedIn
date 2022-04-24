@@ -20,4 +20,5 @@ class StudentAdminConfig(UserAdmin):
       }),
   )
 
-admin.site.register(Student, StudentAdminConfig)
+# admin.site.register(Student, StudentAdminConfig)
+admin.site.register(Student)
