@@ -41,10 +41,10 @@
             <input
               class="form-check-input"
               type="radio"
-              name="flexRadioDefault"
+              name="user_role"
               id="flexRadioDefault1"
               value="student"
-              checked
+              required
             />
             <label class="form-check-label" for="flexRadioDefault1"
               >Student</label
@@ -54,15 +54,30 @@
             <input
               class="form-check-input"
               type="radio"
-              name="flexRadioDefault"
+              name="user_role"
               id="flexRadioDefault2"
               value="organizer"
             />
             <label class="form-check-label" for="flexRadioDefault2"
-              >Organiser</label
+              >Organizer</label
             >
           </div>
         </div>
+
+        <div class="mb-3 col-xl-3 mx-auto username_div">
+          <label for="username"></label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            aria-describedby="emailHelp"
+            placeholder="User Name"
+            required
+            aria-required="true"
+            name="username"
+          />
+        </div>
+
 
         <div class="mb-3 col-xl-3 mx-auto">
           <input
@@ -90,7 +105,7 @@
           <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,20})" -->
         </div>
         <div class="mb-4 col-xl-3 mx-auto d-grid">
-          <button id="signin" type="submit" class="btn btn-primary">
+          <button id="signin" type="submit" class="btn btn-primary" value="login">
             Sign in
           </button>
         </div>
