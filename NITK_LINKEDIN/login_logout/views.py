@@ -49,21 +49,5 @@ def register(request):
         temp_name = fullName
         user = User.objects.create_user(username=fullName, first_name=fullName.split(" ")[0], last_name=fullName.split(" ")[-1], email=email, password=password) 
         user.save()
-      
-      # if CustomUser.objects.filter(email=email).exists():
-      #   messages.info(request, "Email already has an account")
-      #   return redirect('register')
-      # elif password != conf_password:
-      #   messages.info(request, "Passwords do not match")
-      #   return redirect('register')
-      # else:
-      #   user = CustomUser.objects.create_user(email=email, password=password)
-      #   user.save()
-      #   s = Student.objects.create(user=user)
-      #   s.user_name = fullName
-      #   s.first_name = fullName.split(" ")[0]
-      #   s.last_name = fullName.split(" ")[-1]
-      #   s.save()
-        
     return redirect('login')
   return render(request, 'register_page.html')
