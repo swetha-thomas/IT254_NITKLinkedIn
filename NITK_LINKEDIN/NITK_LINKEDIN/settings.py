@@ -130,4 +130,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'login_logout.CustomUser'
+# AUTH_USER_MODEL = 'login_logout.CustomUser'
