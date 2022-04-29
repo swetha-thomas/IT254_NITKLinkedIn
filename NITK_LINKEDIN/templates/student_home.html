@@ -108,8 +108,10 @@
           <img class="user_img" src="{% static 'img/user_pic.jpeg' %}" />
           <h1 class="fw-bold">My Dashboard</h1>
           <br />
-          <p class="fs-5">Semester: {{semester}}</p>
-          <p class="fs-5">CGPA: {{cgpa}}</p>
+          <p class="fs-5">
+            Semester: {{studentSem}}<sup>{{studentSemSuffix}}</sup>
+          </p>
+          <p class="fs-5">CGPA: {{studentCGPA}}</p>
           <p class="fs-5">More Details</p>
         </div>
       </div>

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'student',
     'organization',
     'login_logout',
+    'job',
 ]
 
 MIDDLEWARE = [

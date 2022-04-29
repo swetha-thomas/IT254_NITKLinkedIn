@@ -9,6 +9,9 @@ def studentHome(request):
   return render(request, 'student_home.html', {
     'studentName': student.username,
     'studentProfilePic': student.profile_pic,
+    'studentSem': student.semester,
+    'studentSemSuffix': student.semesterSuffix,
+    'studentCGPA': student.cgpa,
   })
 
 def studentJobs(request):
