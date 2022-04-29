@@ -77,11 +77,11 @@
                 aria-expanded="false"
               >
                 <img
-                  src="{% static 'img/user_pic.jpeg' %}"
+                  src="{{studentProfilePic.url}}"
                   class="avatar"
                   alt="Avatar"
                 />
-                name <b class="caret"></b>
+                {{studentName}} <b class="caret"></b>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>

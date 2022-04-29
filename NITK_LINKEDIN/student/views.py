@@ -1,9 +1,15 @@
 from django.shortcuts import render
 
+from student.models import Student
+
 # Create your views here.
 
 def studentHome(request):
-  return render(request, 'student_home.html')
+  student = Student.objects.get(user=request.user)
+  return render(request, 'student_home.html', {
+    'studentName': student.username,
+    'studentProfilePic': student.profile_pic,
+  })
 
 def studentJobs(request):
   return render(request, 'student_jobs.html')

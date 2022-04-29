@@ -4,18 +4,18 @@ from .models import Student
 # Register your models here.
 
 class StudentModelAdminConfig(admin.ModelAdmin):
-  search_fields = ('user_name', 'first_name', 'last_name',)
-  ordering = ('user_name',)
-  list_display = ('user_name', 'first_name', 'last_name',)
+  search_fields = ('username', 'first_name', 'last_name',)
+  ordering = ('first_name',)
+  list_display = ('username', 'first_name', 'last_name', 'image_tag')
  
   fieldsets = (
-    (None, {'fields': ('user', 'user_name', 'first_name', 'last_name')}),
+    (None, {'fields': ('user', 'first_name', 'last_name', 'semester', 'cgpa', 'profile_pic')}),
   )
   
   add_fieldsets = (
     (None, {
       'classes' : ('wide',),
-      'fields' : ('user', 'user_name', 'first_name', 'last_name',),
+      'fields' : ('user', 'first_name', 'last_name', 'semester', 'cgpa', 'profile_pic'),
       }),
   )
 
