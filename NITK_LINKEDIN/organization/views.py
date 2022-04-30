@@ -7,3 +7,9 @@ def organizationHome(request):
 
 def organizationJobs(request):
   return render(request, 'organization_jobs.html')
+
+def organizationProfile(request):
+  return render(request, 'view_myorg_profile.html')
+
+def organizationEditProfile(request):
+  return render(request, 'edit_myorg_profile.html')
