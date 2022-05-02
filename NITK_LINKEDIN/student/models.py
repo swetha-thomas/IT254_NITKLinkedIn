@@ -7,9 +7,9 @@ from django.utils.html import mark_safe
 class Student(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
   first_name = models.CharField(max_length=50, blank=False)
-  last_name = models.CharField(max_length=50)
-  semester = models.IntegerField(blank=True)
-  cgpa = models.DecimalField(max_digits=3, decimal_places=2, blank=True)
+  last_name = models.CharField(max_length=50, null=True)
+  semester = models.IntegerField(blank=True, null=True)
+  cgpa = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
   profile_pic = models.ImageField(upload_to='student_profile_uploads/', blank=True, default="default_student_profile.jpeg")
   
   

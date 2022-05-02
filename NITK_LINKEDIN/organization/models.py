@@ -13,7 +13,6 @@ class Organization(models.Model):
   locations = models.CharField(max_length= 200, blank=False)
   website_url = models.CharField(max_length= 100)
   contact_no = models.CharField(max_length= 20, blank=False)
-  email_id = models.CharField(max_length= 50, blank=False)
   company_desc = models.CharField(max_length= 200)
   profile_pic = models.ImageField(upload_to='org_profile_uploads/', blank=True, default="default_org_profile.jpeg")
 
