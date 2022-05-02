@@ -57,7 +57,7 @@ def logout(request):
 def register(request):
   if request.method == 'POST':
     if request.POST.get('register_type') == 'student':
-      username = request.POST['username'].strip().lower()
+      username = request.POST['username'].strip()
       fullName = request.POST["fullName"].strip().split(" ")
       email = request.POST["email"]
       password = request.POST["password"]
@@ -76,7 +76,7 @@ def register(request):
         student.save()
         return redirect('login')
     else:
-      username = request.POST['username'].strip().lower()
+      username = request.POST['username'].strip()
       org_name = request.POST['fullName'].strip()
       email = request.POST['email']
       password = request.POST["password"].strip()
@@ -91,7 +91,7 @@ def register(request):
       else:
         user = User.objects.create_user(username=username, first_name=org_name, email=email, password=password) 
         user.save()
-        organization = Organization(user=user, org_name=org_name, email=email)
+        organization = Organization(user=user, org_name=org_name)
         organization.save()
         return redirect('login')
   return render(request, 'register_page.html')
