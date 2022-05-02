@@ -20,7 +20,12 @@ def login(request):
       if user is not None:
         login_user(request, user)
         print(Student.objects.filter(user=user))
-        return redirect('studentHome')
+        
+        if Student.objects.filter(user=user).count() != 0:
+          return redirect('studentHome')
+        else:
+          messages.info(request, "Student Doesnt Exist for this user")
+          return redirect('login')
       else:
         messages.info(request, "Invalid Credentials")
         return redirect('login')
