@@ -418,17 +418,20 @@
       <section class="main-section flex-container">
         <div class="job-list-col">
           <ul class="job-list">
+            {% for job in jobs %}
             <li class="job">
               <a href="">
                 <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
                 <div class="job-mini-details">
-                  <div class="job-title">Sr Solutions Architect - Egypt</div>
-                  <div class="job-company">Amazon Web Services (AWS)</div>
-                  <div class="job-address">Manama, Capital Governorate, Bahrain</div>
+                  <div class="job-title">{{ job.job_name }}</div>
+                  <div class="job-company">{{ job.company }}</div>
+                  <div class="job-address">{{ job.location_of_work }}</div>
                 </div>
               </a>
             </li>
-            <li class="job">
+            {% endfor %}
+
+            {% comment %} <li class="job">
               <a href="">
                 <img class="job-company-img" src="{% static 'img/job-company-2.jpg' %}" alt="">
                 <div class="job-mini-details">
@@ -497,7 +500,7 @@
                   <div class="job-address">Durrat Al Bahrain, Southern Governorate, Bahrain</div>
                 </div>
               </a>
-            </li>
+            </li> {% endcomment %}
           </ul>
         </div>
         <div class="job-desc-col">

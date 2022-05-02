@@ -23,5 +23,5 @@ class Organization(models.Model):
   def image_tag(self):
     return mark_safe('<img src="%s" width="50" height="50" />' % (self.profile_pic))
   
-  def __str__(self):
-    return '{} : {}'.format(self.org_name, self.locations)
+  # def __str__(self):
+  #   return '{} : {}'.format(self.org_name, self.locations)
