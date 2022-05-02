@@ -89,7 +89,7 @@ def register(request):
       else:
         user = User.objects.create_user(username=username, first_name=org_name, email=email, password=password) 
         user.save()
-        organization = Organization(user=user, org_name=org_name);
+        organization = Organization(user=user, org_name=org_name)
         organization.save()
         return redirect('login')
   return render(request, 'register_page.html')

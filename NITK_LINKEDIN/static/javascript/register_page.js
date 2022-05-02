@@ -3,20 +3,20 @@ var role_organiser = document.getElementById("organiser");
 
 var full_name = document.getElementById("fullName");
 var email = document.getElementById("email");
-var username_div = document.getElementsByClassName("username_class");
+var username = document.getElementById("username");
 
 role_organiser.addEventListener("click", displayOrganiserFields);
 role_student.addEventListener("click", displayStudentFields);
 
 function displayOrganiserFields() {
-    username_div[0].style.display = "none";
-
+    // username_div[0].style.display = "none";
+    username.placeholder = "username";
     full_name.placeholder = "Name of organisation";
     email.placeholder = "";
 }
 
 function displayStudentFields() {
-    username_div[0].style.display = "block";
+    // username_div[0].style.display = "block";
 
     username.placeholder = "username";
     full_name.placeholder = "FirstName LastName";

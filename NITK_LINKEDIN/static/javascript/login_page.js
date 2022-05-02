@@ -1,15 +1,15 @@
 var student = document.getElementById("flexRadioDefault1");
 var organiser = document.getElementById("flexRadioDefault2");
 
-var username_div = document.getElementsByClassName('username_div');
-student.addEventListener('click', () => {
-    username_div[0].style.display = "block";
-});
+// var username_div = document.getElementsByClassName('username_div');
+// student.addEventListener('click', () => {
+//     username_div[0].style.display = "block";
+// });
 
-organiser.addEventListener('click', () => {
-    username_div[0].style.display = "none";
+// organiser.addEventListener('click', () => {
+//     username_div[0].style.display = "none";
 
-});
+// });
 
 // student.addEventListener('click', function (params) {
 //     document.getElementById("exampleInputEmail1").pattern = "^[a-z][a-z]+\.[0-9]{3}[a-z]{2}[0-9]{3}@nitk\.edu\.in$";
