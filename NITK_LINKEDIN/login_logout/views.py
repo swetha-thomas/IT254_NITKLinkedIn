@@ -30,7 +30,22 @@ def login(request):
         messages.info(request, "Invalid Credentials")
         return redirect('login')
     else:
-      print("regex doesnt match")
+      email = request.POST["email"]
+      password = request.POST["password"]
+      username = request.POST["username"]
+      user = authenticate(username=username, email=email, password=password)
+      if user is not None:
+        login_user(request, user)
+        print(Organization.objects.filter(user=user))
+        
+        if Organization.objects.filter(user=user).count() != 0:
+          return redirect('organizationHome')
+        else:
+          messages.info(request, "Organization Doesnt Exist for this user")
+          return redirect('login')
+      else:
+        messages.info(request, "Invalid Credentials")
+        return redirect('login')
     
   return render(request, 'login_page.html')
 
