@@ -7,6 +7,7 @@ from django.utils.html import mark_safe
 class Organization(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
   org_name = models.CharField(max_length=100, blank=False)
+  email = models.EmailField(max_length=100)
   industry = models.CharField(max_length=50)
   company_size = models.CharField(max_length=50)
   company_type = models.CharField(max_length=50)

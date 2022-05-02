@@ -77,8 +77,10 @@ def register(request):
         return redirect('login')
     else:
       username = request.POST['username'].strip().lower()
-      org_name = request.POST['org_name'].strip()
+      org_name = request.POST['fullName'].strip()
       email = request.POST['email']
+      password = request.POST["password"].strip()
+      conf_password = request.POST["conf_password"].strip()
       
       if User.objects.filter(email=email).exists():
         messages.info(request, "Email already has an account")
@@ -89,7 +91,7 @@ def register(request):
       else:
         user = User.objects.create_user(username=username, first_name=org_name, email=email, password=password) 
         user.save()
-        organization = Organization(user=user, org_name=org_name)
+        organization = Organization(user=user, org_name=org_name, email=email)
         organization.save()
         return redirect('login')
   return render(request, 'register_page.html')
