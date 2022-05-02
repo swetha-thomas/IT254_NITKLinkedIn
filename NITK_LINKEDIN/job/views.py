@@ -3,6 +3,5 @@ from job.models import Job
 
 # Create your views here.
 
-def studentJobs(request):
-    print(Job.objects.all())
-    return render(request, {'jobs' : Job.objects.all()})
+def studentJob(request):
+    return render(request, "student_jobs.html", {'jobs' : Job.objects.all()})

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from job.models import Job
 from student.models import Student
 
 # Create your views here.
@@ -14,8 +14,8 @@ def studentHome(request):
     'studentCGPA': student.cgpa,
   })
 
-def studentJobs(request):
-  return render(request, 'student_jobs.html')
+def studentJob(request):
+    return render(request, "student_jobs.html", {'jobs' : Job.objects.all()})
 
 def studentProfile(request):
   return render(request, 'view_mystudent_profile.html')

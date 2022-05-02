@@ -69,7 +69,7 @@
             </li>
             <!-- <li><a class="active nav-link" href="student_connect.html"><i class="fa fa-users"></i> Connect</a></li> -->
             <li>
-              <a class="active nav-link" href="{% url 'studentJobs' %}"
+              <a class="active nav-link" href="{% url 'studentJob' %}"
                 ><i class="fa fa-briefcase"></i> Get Hired</a
               >
             </li>
@@ -420,7 +420,7 @@
           <ul class="job-list">
             {% for job in jobs %}
             <li class="job">
-              <a href="">
+              <a href="" id="job-link" onclick = "do_smtg(jobs)">
                 <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
                 <div class="job-mini-details">
                   <div class="job-title">{{ job.job_name }}</div>
@@ -503,17 +503,19 @@
             </li> {% endcomment %}
           </ul>
         </div>
+        
         <div class="job-desc-col">
           <article class="job-desc">
+            {% for job in jobs %}
             <header class="job-desc-top">
               <div class="job-desc-title">
-                Sr Solutions Architect - Egypt
+                {{ job.job_name }}
               </div>
               <div class="job-desc-company">
-                Amazon Web Services (AWS)
+                {{ job.company }}
               </div>
               <div class="job-desc-address">
-                Manama, Capital Governorate, Bahrain
+                {{ job.location_of_work }}
               </div>
               <div class="job-desc-time">
                 2 weeks ago
@@ -523,7 +525,7 @@
               <li class="job-type">
                 <i class="fa fa-solid fa-suitcase"></i>
                 <span>
-                  Full-time · Mid-Senior level</li>
+                  {{ job.job_type }}</li>
                 </span>
               <li class="job-employees-num">
                 <i class="fa fa-solid fa-building"></i>
@@ -538,17 +540,25 @@
               </li>
             </ul>
 
-            <a href="" class="job-site-button">  Go To Site <i class="fa fa-solid fa-link"></i></a>
+            <a href="" class="job-site-button"> Go To Site <i class="fa fa-solid fa-link"></i></a>
 
             <article class="job-desc-summary">
               <p class="description-text">description</p>
-              <p class="job-summary">Amazon Web Services (AWS) is looking for a Senior Solutions Architect to join our thriving technical community and growing business in Egypt as part of the EMEA Public Sector team. You will join a friendly and supportive team, working together to bring the latest in disruptive cloud computing technologies to organisations serving our Public Sector customers, including: government agencies, state-owned companies, educational institutions, healthcare and non-profit organisations. Our Public Sector teams help customers build a deeper understanding of hyper-scale cloud technology and application architectures, and they have the consultative and leadership skills required to drive deliver successful outcomes.</p>
+              <p class="job-summary">{{ job.job_description }}</p>
             </article>
+            {% endfor %}
           </article>
         </div>
       </section>
 
     </main>
+
+    <script>
+      function do_smtg(jobs) {
+        console.log(jobs);
+      }
+    </script>
+    <script src="{% static 'javascript/student_jobs.js' %}"></script>
 
     <!-- Bootstrap Scripts -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
