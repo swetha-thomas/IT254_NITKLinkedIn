@@ -115,12 +115,16 @@
                         <br>
                         <div class="col-md-10">
                           <label for="name">Organization Name</label>
-                          <input type="text" id="name" name="name" class="form-control"  value="{{name}}" readonly >
+                          <input type="text" id="name" name="name" class="form-control"  value="{{orgName}}" readonly >
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-5">
                               <label for="industry">Industry</label><br>
                               <input type="text" id="industry" name="industry" class="form-control" value="{{industry}}" readonly ><br>
+                            </div>
+                            <div class="col-md-5">
+                              <label for="contact">Contact Number</label>
+                              <input type="text" id="contact" name="contact" class="form-control" value="{{contact_no}}" readonly>
                             </div>
                             <p></p>
                             <div class="col-md-5">
@@ -139,19 +143,13 @@
                               <label for="web_url">Website URL</label>
                               <input type="text" id="web_url" name="web_url" class="form-control"  value="{{web_url}}" readonly><br>
                             </div>
-                            <div class="col-md-5">
-                              <label for="contact">Contact Number</label>
-                              <input type="text" id="contact" name="contact" class="form-control" value="{{contact}}" readonly>
-                            </div>
-                            <div class="col-md-5">
-                              <label for="email">Email ID</label>
-                              <input type="email" id="email" name="email" class="form-control" value="{{email}}" readonly><br>
-                            </div>
+                            
+                            
                         </div> 
                         <br>
                         <label class="labels">About The Company</label>
                         <p></p>
-                        <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 83%;" value="{{desc}}" readonly></textarea>
+                        <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 83%;" value="{{desc}}" readonly>{{desc}}</textarea>
                     </div>
                 </div>
             </div>

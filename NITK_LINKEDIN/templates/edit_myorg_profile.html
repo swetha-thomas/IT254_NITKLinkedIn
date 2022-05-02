@@ -113,68 +113,69 @@
                             <h4><b>My Organization Profile</b></h4>
                         </div>
                         <br>
-                        <div class="col-md-10">
-                          <label for="name">Organization Name</label>
-                          <input type="text" id="name" name="name" class="form-control"  value="{{name}}" >
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-5">
-                                <label for="industry">Industry</label><br>
-                                <input type="text" id="industry" name="industry" class="form-control" value="{{industry}}" ><br>
+                        <form action="" method="POST">
+                          {% csrf_token %}
+                          <div class="col-md-10">
+                            <label for="name">Organization Name</label>
+                            <input type="text" id="name" name="name" class="form-control"  value="{{orgName}}" readonly>
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-md-5">
+                                  <label for="industry">Industry</label><br>
+                                  <input type="text" id="industry" name="industry" class="form-control" value="{{industry}}" ><br>
+                              </div>
+                              <div class="col-md-5">
+                                <label for="contact">Contact Number</label>
+                                <input type="text" id="contact" name="contact" class="form-control" value="{{contact_no}}" >
                             </div>
-                            <p></p>
-                            <div class="col-md-5">
-                                <label for="company_size">Company Size</label>
-                                <select id="company_size" name="company_size" class="form-select">
-                                  <option disabled="disabled" selected>-- Please select an option --</option>
-                                  <option value="0-1">0-1 employees</option>
-                                  <option value="2-10">2-10 employees</option>
-                                  <option value="11-50">11-50 employees</option>
-                                  <option value="51-200">51-200 employees</option>
-                                  <option value="201-500">201-500 employees</option>
-                                  <option value="501-1000">501-1000 employees</option>
-                                  <option value="1001-5000">1001-5000 employees</option>
-                                  <option value="5001-10000">5001-10000 employees</option>
-                                  <option value="10001+">10001+ employees</option>
+                              <p></p>
+                              <div class="col-md-5">
+                                  <label for="company_size">Company Size</label>
+                                  <select id="company_size" value = "{{company_size}}" name="company_size" class="form-select">
+                                    <option value="0-1 employees">0-1 employees</option>
+                                    <option value="2-10 employees">2-10 employees</option>
+                                    <option value="11-50 employees">11-50 employees</option>
+                                    <option value="51-200 employees">51-200 employees</option>
+                                    <option value="201-500 employees">201-500 employees</option>
+                                    <option value="501-1000 employees">501-1000 employees</option>
+                                    <option value="1001-5000 employees">1001-5000 employees</option>
+                                    <option value="5001-10000 employees">5001-10000 employees</option>
+                                    <option value="10001+ employees">10001+ employees</option>
+                                  </select>
+                                </div>
+                              <div class="col-md-5">
+                                <label for="company_type">Company Type</label>
+                                <select id="company_type" value="{{company_type}}" name="company_type" class="form-select">
+                                  <option value="Educational">Educational</option>
+                                  <option value="Government Agency">Government Agency</option>
+                                  <option value="Non profit">Non profit</option>
+                                  <option value="Partnership">Partnership</option>
+                                  <option value="Privately held">Privately held</option>
+                                  <option value="Public Company">Public Company</option>
+                                  <option value="Self Employeed">Self Employeed</option>
+                                  <option value="Self Owned">Self Owned</option>
                                 </select>
                               </div>
-                            <div class="col-md-5">
-                              <label for="company_type">Company Type</label>
-                              <select id="company_type" name="company_type" class="form-select">
-                                <option disabled="disabled" selected>-- Please select an option --</option>
-                                <option value="educational">Educational</option>
-                                <option value="government">Government Agency</option>
-                                <option value="nonprofit">Non profit</option>
-                                <option value="partnership">Partnership</option>
-                                <option value="private">Privately held</option>
-                                <option value="public">Public Company</option>
-                                <option value="selfemployeed">Self Employeed</option>
-                                <option value="self-owned">Self Owned</option>
-                              </select>
-                            </div>
-                            <p></p><p></p>
-                            <div class="col-md-10">
-                                <label for="location">Locations</label>
-                                <input type="text" id="location" name="location" class="form-control"  value="{{locations}}" ><br>
-                            </div>
-                            <div class="col-md-10">
-                                <label for="web_url">Website URL</label>
-                                <input type="text" id="web_url" name="web_url" class="form-control"  value="{{web_url}}" ><br>
-                            </div>
-                            <div class="col-md-5">
-                                <label for="contact">Contact Number</label>
-                                <input type="text" id="contact" name="contact" class="form-control" value="{{contact}}" >
-                            </div>
-                            <div class="col-md-5">
-                                <label for="email">Email ID</label>
-                                <input type="email" id="email" name="email" class="form-control" value="{{email}}" ><br>
-                            </div>
-                        </div> 
-                        <br>
-                        <label class="labels">About The Company</label>
-                        <p></p>
-                        <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 83%;" value="{{desc}}" ></textarea>
-                    </div>
+                              <p></p><p></p>
+                              <div class="col-md-10">
+                                  <label for="location">Locations</label>
+                                  <input type="text" id="location" name="location" class="form-control"  value="{{locations}}" ><br>
+                              </div>
+                              <div class="col-md-10">
+                                  <label for="web_url">Website URL</label>
+                                  <input type="text" id="web_url" name="web_url" class="form-control"  value="{{web_url}}" ><br>
+                              </div>
+                              
+                              
+                          </div> 
+                          <br>
+                          <label class="labels">About The Company</label>
+                          <p></p>
+                          <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 83%;" value="{{desc}}" >{{desc}}</textarea>
+                          <br><br>
+                          <button type="submit">Submit</button>
+                      </form>
+                      </div>
                 </div>
             </div>
         </div>
