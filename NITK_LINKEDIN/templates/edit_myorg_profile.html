@@ -132,28 +132,23 @@
                               <div class="col-md-5">
                                   <label for="company_size">Company Size</label>
                                   <select id="company_size" value = "{{company_size}}" name="company_size" class="form-select">
-                                    <option value="0-1 employees">0-1 employees</option>
-                                    <option value="2-10 employees">2-10 employees</option>
-                                    <option value="11-50 employees">11-50 employees</option>
-                                    <option value="51-200 employees">51-200 employees</option>
-                                    <option value="201-500 employees">201-500 employees</option>
-                                    <option value="501-1000 employees">501-1000 employees</option>
-                                    <option value="1001-5000 employees">1001-5000 employees</option>
-                                    <option value="5001-10000 employees">5001-10000 employees</option>
-                                    <option value="10001+ employees">10001+ employees</option>
+                                    <option value="{{ size_list | first }}" selected>{{ size_list | first }}</option>
+                                    {% for row in size_list %}
+                                    {% if not forloop.first %}
+                                    <option value="{{row}}">{{ row }}</option>
+                                    {% endif %}
+                                    {% endfor %}
                                   </select>
                                 </div>
                               <div class="col-md-5">
                                 <label for="company_type">Company Type</label>
                                 <select id="company_type" value="{{company_type}}" name="company_type" class="form-select">
-                                  <option value="Educational">Educational</option>
-                                  <option value="Government Agency">Government Agency</option>
-                                  <option value="Non profit">Non profit</option>
-                                  <option value="Partnership">Partnership</option>
-                                  <option value="Privately held">Privately held</option>
-                                  <option value="Public Company">Public Company</option>
-                                  <option value="Self Employeed">Self Employeed</option>
-                                  <option value="Self Owned">Self Owned</option>
+                                  <option value="{{ type_list | first }}" selected>{{ type_list | first }}</option>
+                                  {% for row in type_list %}
+                                  {% if not forloop.first %}
+                                  <option value="{{row}}">{{ row }}</option>
+                                  {% endif %}
+                                  {% endfor %}
                                 </select>
                               </div>
                               <p></p><p></p>
