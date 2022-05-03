@@ -420,7 +420,7 @@
           <ul class="job-list">
             {% for job in jobs %}
             <li class="job">
-              <a href="" id="job-link" onclick = "do_smtg(jobs)">
+              <a href="#" id="job-link" onclick = "job_desc({{job.id}})">
                 <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
                 <div class="job-mini-details">
                   <div class="job-title">{{ job.job_name }}</div>
@@ -505,8 +505,11 @@
         </div>
         
         <div class="job-desc-col">
+          div
           <article class="job-desc">
             {% for job in jobs %}
+            <div id = "job-{{job.id}}" class="job-desc-container" style = "display: none">
+              
             <header class="job-desc-top">
               <div class="job-desc-title">
                 {{ job.job_name }}
@@ -518,6 +521,7 @@
                 {{ job.location_of_work }}
               </div>
               <div class="job-desc-time">
+                {% comment %} will later change it to dynamic time calcuated as current timestamp - date of job posted {% endcomment %}
                 2 weeks ago
               </div>
             </header>
@@ -530,34 +534,33 @@
               <li class="job-employees-num">
                 <i class="fa fa-solid fa-building"></i>
                 <span>
+                  {% comment %} idk what field from job should be dynamically passed here {% endcomment %}
                   10,001+ employees · IT Services and IT Consulting</li>
                 </span>
               <li class="job-college-allumini">
                 <i class="fa fa-solid fa-users"></i>
                 <span>
+                  {% comment %} idk what field from job should be dynamically passed here {% endcomment %}
                   95 college alumni
                 </span>
               </li>
             </ul>
-
-            <a href="" class="job-site-button"> Go To Site <i class="fa fa-solid fa-link"></i></a>
+            <br><br>
+            <a href="https://{{job.site_url}}/" class="job-site-button"> Go To Site <i class="fa fa-solid fa-link"></i></a>
 
             <article class="job-desc-summary">
-              <p class="description-text">description</p>
+              <p class="description-text">Description</p>
               <p class="job-summary">{{ job.job_description }}</p>
             </article>
-            {% endfor %}
+          </div>
+          {% endfor %}
+            </div>
           </article>
         </div>
       </section>
 
     </main>
 
-    <script>
-      function do_smtg(jobs) {
-        console.log(jobs);
-      }
-    </script>
     <script src="{% static 'javascript/student_jobs.js' %}"></script>
 
     <!-- Bootstrap Scripts -->

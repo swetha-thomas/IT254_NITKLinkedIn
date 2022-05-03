@@ -1,8 +1,12 @@
-let job_desc_col = document.getElementsByClassName('job-desc-col')[0];
-// job_desc_col.style.display = "none";
+function job_desc(id) {
+    console.log(id);
+    let all_col = document.getElementsByClassName("job-desc-container")
+        // console.log(all_col);
 
-// document.getElementById('job-link').addEventListener('click',do_smtg);
-function do_smtg(jobs) {
-    console.log(jobs);
+    for (let i of all_col) {
+        console.log(i);
+        i.style.display = "none";
+    }
+    let job_desc_col = document.getElementById(`job-${id}`);
+    job_desc_col.style.display = "block";
 }
-// do_smtg({{jobs}})
