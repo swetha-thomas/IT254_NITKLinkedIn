@@ -9,13 +9,13 @@ class StudentModelAdminConfig(admin.ModelAdmin):
   list_display = ('username', 'first_name', 'last_name', 'image_tag')
  
   fieldsets = (
-    (None, {'fields': ('user', 'first_name', 'last_name', 'semester', 'cgpa', 'profile_pic')}),
+    (None, {'fields': ('user', 'first_name', 'last_name', 'semester', 'branch', 'cgpa', 'profile_pic')}),
   )
   
   add_fieldsets = (
     (None, {
       'classes' : ('wide',),
-      'fields' : ('user', 'first_name', 'last_name', 'semester', 'cgpa', 'profile_pic'),
+      'fields' : ('user', 'first_name', 'last_name', 'semester', 'branch', 'cgpa', 'profile_pic'),
       }),
   )
 

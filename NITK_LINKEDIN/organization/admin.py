@@ -6,18 +6,18 @@ from organization.models import Organization
 
 # just basic adminConfig so that i can continue w jobs
 class OrganizationModelAdminConfig(admin.ModelAdmin):
-  search_fields = ('org_name', )
-  ordering = ('org_name',)
-  list_display = ('org_name',)
+  search_fields = ('org_name', 'user')
+  ordering = ('org_name','user')
+  list_display = ('user', 'org_name',)
  
   fieldsets = (
-    (None, {'fields': ('org_name', )}),
+    (None, {'fields': ('user', 'org_name')}),
   )
   
   add_fieldsets = (
     (None, {
       'classes' : ('wide',),
-      'fields' : ('org_name',),
+      'fields' : ('user', 'org_name',),
       }),
   )
 

@@ -1,13 +1,19 @@
-.user_img{
-  float:right;
-  width:250px;
+.user-img-container {
+  float: right;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.user_img {
+  width: 250px;
 }
 
 .date {
-  font-family: Helvetica,Arial,open-sans;
-  font-size: .8571rem;
+  font-family: Helvetica, Arial, open-sans;
+  font-size: 0.8571rem;
   font-weight: 600;
-  color: #0093e0!important;
+  color: #0093e0 !important;
 }
 
 .left-right-arrows {
@@ -42,7 +48,7 @@
 .timeline-section .timeline-date {
   min-width: 81px;
   height: 88px;
-  background-color: #0093e0!important;
+  background-color: #0093e0 !important;
   font-family: "Helvetica Neue", Helvetica, Arial, open-sans;
   font-weight: 600;
   padding-top: 15px;

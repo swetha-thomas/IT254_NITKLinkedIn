@@ -12,6 +12,7 @@ def studentHome(request):
     'studentSem': student.semester,
     'studentSemSuffix': student.semesterSuffix,
     'studentCGPA': student.cgpa,
+    'studentBranch': student.branch,
   })
 
 def studentJob(request):

@@ -105,13 +105,16 @@
     <div class="container py-4">
       <div class="p-5 mb-4 bg-light">
         <div class="container-fluid py-2">
-          <img class="user_img" src="{{studentProfilePic.url}}" />
+          <div class="user-img-container">
+            <img class="user_img" src="{{studentProfilePic.url}}" />
+          </div>
           <h1 class="fw-bold">My Dashboard</h1>
           <br />
           <p class="fs-5">
             Semester: {{studentSem}}<sup>{{studentSemSuffix}}</sup>
           </p>
           <p class="fs-5">CGPA: {{studentCGPA}}</p>
+          <p class="fs-5">Branch: {{studentBranch}}</p>
           <p class="fs-5">More Details</p>
         </div>
       </div>
