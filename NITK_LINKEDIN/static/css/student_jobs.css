@@ -239,6 +239,10 @@ body {
   overflow-y: scroll;
 }
 
+.job-desc-top {
+  margin-bottom: 1.2rem;
+}
+
 .job-desc {
   display: flex;
   flex-direction: column;

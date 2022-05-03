@@ -420,7 +420,7 @@
           <ul class="job-list">
             {% for job in jobs %}
             <li class="job">
-              <a href="#" id="job-link" onclick = "job_desc({{job.id}})">
+              <a href="#" id="job-link" onclick = 'job_desc({{job.id}})''>
                 <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
                 <div class="job-mini-details">
                   <div class="job-title">{{ job.job_name }}</div>
@@ -505,7 +505,6 @@
         </div>
         
         <div class="job-desc-col">
-          div
           <article class="job-desc">
             {% for job in jobs %}
             <div id = "job-{{job.id}}" class="job-desc-container" style = "display: none">
