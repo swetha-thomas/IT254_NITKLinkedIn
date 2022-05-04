@@ -12,3 +12,4 @@ class Job(models.Model):
   job_level = models.CharField(max_length=100)
   site_url = models.CharField(max_length=300)
   job_description = models.TextField()
+  onsite_remote = models.CharField(max_length=200, null=True, blank=True, default="Remote")
