@@ -3,13 +3,15 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login as login_user
+from django.views.decorators.csrf import csrf_protect
 
 from organization.models import Organization
 from student.models import Student
 
 
 # Create your views here.
-  
+
+@csrf_protect
 def login(request):
   if request.method == 'POST':
     if request.POST.get('user_role') == 'student':
@@ -54,6 +56,7 @@ def logout(request):
   auth.logout(request)
   return redirect('login')
 
+@csrf_protect
 def register(request):
   if request.method == 'POST':
     if request.POST.get('register_type') == 'student':
