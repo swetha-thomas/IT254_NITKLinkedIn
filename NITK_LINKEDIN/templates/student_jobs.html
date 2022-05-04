@@ -432,7 +432,7 @@
                 <img class="job-company-img" src="{% static 'img/job-company-1.jpg' %}" alt="">
                 <div class="job-mini-details">
                   <div class="job-title">{{ job.job_name }}</div>
-                  <div class="job-company">{{ job.company }}</div>
+                  <div class="job-company">{{ job.company.org_name }}</div>
                   <div class="job-address">{{ job.location_of_work }}</div>
                 </div>
               </a>
