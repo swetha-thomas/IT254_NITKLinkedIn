@@ -17,7 +17,7 @@ class Student(models.Model):
   semester = models.IntegerField(blank=True, null=True, default=1)
   cgpa = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True, default=0.0)
   contact = models.CharField(max_length=15, default="+910000000000")
-  year_of_pass_out = models.IntegerField(blank=True, null=True, default=2000)
+  year_of_pass_out = models.IntegerField(blank=True, null=True, default=2022)
   aboutme = models.TextField(max_length=15, blank=True, null=True)
   profile_pic = models.ImageField(upload_to='student_profile_uploads/', blank=True, default="default_student_profile.jpeg")
   
