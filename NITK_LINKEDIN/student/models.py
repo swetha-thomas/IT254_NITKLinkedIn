@@ -12,6 +12,7 @@ class Student(models.Model):
   cgpa = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
   branch = models.CharField(max_length=150, blank=True, null=True)
   profile_pic = models.ImageField(upload_to='student_profile_uploads', blank=True, default="default_student_profile.jpeg")
+  year_of_pass_out = models.IntegerField(blank=True, null=True, default=2000)
   
   
   def image_tag(self):

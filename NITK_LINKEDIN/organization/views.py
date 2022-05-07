@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
+from django.template.defaulttags import register
+
+from datetime import date
 
 from organization.models import Organization
 from student.models import Student
@@ -10,18 +13,46 @@ def organizationHome(request):
   organization = Organization.objects.get(user=request.user)
   students = Student.objects.all()
   number_of_students = students.count()
-  avg_cgpa_of_students = round(Student.objects.aggregate(Sum('cgpa'))['cgpa__sum'] / number_of_students, 2)
   branchesDict = Student.objects.order_by().values('branch').distinct()
   branches = []
   for branch in branchesDict:
     branches.append(branch['branch'])
-  # print(branches)
-  # work on getting avg of each branch
+  
+  past_7_years = {}
+  for i in range(7):
+    past_7_years[i] = {'year_number': date.today().year - i}
+    # past_7_years[i] = {}
+    
+    
+    students_of_this_year = Student.objects.all().filter(year_of_pass_out=date.today().year-i)
+    branches_of_this_year = students_of_this_year.order_by().values('branch').distinct()
+    number_of_students_of_this_year = students_of_this_year.count()
+    avg_cgpa_of_students_of_this_year = round(students_of_this_year.aggregate(Sum('cgpa'))['cgpa__sum'] / number_of_students_of_this_year, 2)
+    marks_of_this_year = {}
+    for branch in branches_of_this_year:
+      if branch['branch'] not in marks_of_this_year.keys():
+        marks_of_this_year[branch['branch']] = 0
+        number_of_students_of_this_branch_of_this_year = students_of_this_year.filter(branch=branch['branch']).count()
+        marks_of_this_year[branch['branch']] += round(students_of_this_year.filter(branch=branch['branch']).aggregate(Sum('cgpa'))['cgpa__sum'] / number_of_students_of_this_branch_of_this_year, 2)
+    
+    past_7_years[i]['students'] = students_of_this_year
+    past_7_years[i]['branches'] = branches_of_this_year
+    past_7_years[i]['num_students'] = number_of_students_of_this_year
+    past_7_years[i]['avg_cgpa'] = avg_cgpa_of_students_of_this_year
+    past_7_years[i]['marks'] = marks_of_this_year
+  
+  print(past_7_years, sep="\n", end="\n")
+  
   return render(request, 'organization_home.html', {
     'orgName': organization.org_name,
+    'organizationProfilePic': organization.profile_pic,
     'numOfStudentsFromCollege': number_of_students,
-    'avgCGPAOfStudents': avg_cgpa_of_students,
-    'branches': branches,
+    'avgCGPAOfStudents': past_7_years[0]['avg_cgpa'],
+    'branches': past_7_years[0]['branches'],
+    'marks': past_7_years[0]['marks'],
+    'num_of_years': len(past_7_years),
+    'past_years': past_7_years,
+    
   })
 
 
@@ -60,10 +91,18 @@ def organizationEditProfile(request):
       company_type_list.insert(0,company_type_selected)
       company_type_list.pop(ind+1)
 
-    return render(request, 'edit_myorg_profile.html', 
-      {'orgName':org.org_name, 'industry':org.industry, 'company_size':org.company_size, 
-      'company_type': org.company_type, 'locations':org.locations, 'web_url': org.website_url, 
-      'contact_no': org.contact_no, 'desc':org.company_desc, 'size_list':company_size_list, 'type_list':company_type_list})
+    return render(request, 'edit_myorg_profile.html', {
+      'orgName':org.org_name, 
+      'industry':org.industry, 
+      'company_size':org.company_size, 
+      'company_type': org.company_type, 
+      'locations':org.locations, 
+      'web_url': org.website_url, 
+      'contact_no': org.contact_no, 
+      'desc':org.company_desc, 
+      'size_list':company_size_list, 
+      'type_list':company_type_list
+    })
 
 def organizationJob(request):
   if(request.method == 'POST'):
@@ -98,3 +137,15 @@ def organizationProfile(request):
       'company_type': org.company_type, 'locations':org.locations, 'web_url': org.website_url, 
       'contact_no': org.contact_no, 'desc':org.company_desc})
 
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+  
+@register.filter
+def div( value, arg ):
+    try:
+        value = int( value )
+        arg = int( arg )
+        if arg: return value / arg
+    except: pass
+    return ''

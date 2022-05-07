@@ -434,3 +434,9 @@ a:active {
   background-color: #3917a0;
   color: #fff;
 }
+
+#my-chart {
+  --data-axes-color: rgba(0, 0, 0, 0.15);
+  --data-axes-style: solid;
+  --data-axes-width: 1px;
+}
