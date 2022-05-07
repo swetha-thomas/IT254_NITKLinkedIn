@@ -20,6 +20,8 @@ def organizationHome(request):
   
   past_7_years = {}
   for i in range(7):
+    if i != 0:
+      continue
     past_7_years[i] = {'year_number': date.today().year - i}
     # past_7_years[i] = {}
     
