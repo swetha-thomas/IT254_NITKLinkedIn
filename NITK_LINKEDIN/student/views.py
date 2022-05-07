@@ -42,11 +42,16 @@ def studentJob(request):
   return render(request, "student_jobs.html", {'jobs' : filtered_jobs, 'first_name':student.first_name, 'last_name':student.last_name})
 
 def studentProfile(request):
-  student=Student.objects.get(user=request.user)
+  student = Student.objects.get(user=request.user)
+  exp = WorkExperience.objects.all().filter(user=request.user)
+  clubs = Clubs.objects.all().filter(user=request.user)
+  skills = Skills.objects.all().filter(user=request.user)
+  education = Education.objects.all().filter(user=request.user)
+  courses = Courses.objects.all().filter(user=request.user)
   return render(request, 'view_mystudent_profile.html', 
       {'first_name':student.first_name, 'last_name':student.last_name, 'gender':student.gender, 'dob':student.dob, 'roll_no':student.roll_no, 
-      'branch': student.branch, 'semester':student.semester, 'cgpa': student.cgpa, 
-      'contact_no': student.contact})
+      'branch': student.branch, 'semester':student.semester, 'cgpa': student.cgpa, 'contact_no': student.contact, 'yop': student.year_of_pass_out, 'desc': student.aboutme, 'exp':exp, 'clubs':clubs, 
+      'skills':skills, 'edu':education, 'courses': courses})
 
 
 def studentEditProfile(request):
@@ -58,17 +63,22 @@ def studentEditProfile(request):
     semester = request.POST["semester"]
     cgpa = request.POST["cgpa"]
     contact_no = request.POST["contact"]
-    
+    yop = request.POST["yop"]
+    aboutme = request.POST["aboutme"]
 
-    Student.objects.filter(user=request.user).update(gender=gender, dob=dob, roll_no=roll_no, branch=branch, semester=semester, cgpa=cgpa, contact=contact_no)
+    Student.objects.filter(user=request.user).update(gender=gender, dob=dob, roll_no=roll_no, branch=branch, semester=semester, cgpa=cgpa, contact=contact_no, year_of_pass_out=yop, aboutme=aboutme)
     return redirect('studentProfile')
   
   elif request.method == 'GET':
-    student=Student.objects.get(user=request.user)
-    exp=WorkExperience.objects.all().filter(user=request.user)
+    student = Student.objects.get(user=request.user)
+    exp = WorkExperience.objects.all().filter(user=request.user)
+    clubs = Clubs.objects.all().filter(user=request.user)
+    skills = Skills.objects.all().filter(user=request.user)
+    education = Education.objects.all().filter(user=request.user)
+    courses = Courses.objects.all().filter(user=request.user)
     branch_list=["Chemical Engineering","Civil Engineering","Computer Science and Engineering","Electrical and Electronics Engineering","Electronics and Communication Engineering","Information Technology","Mechanical Engineering","Metallurgical and Materials Engineering","Mining Engineering"]
-    if student.branch==None:
-      branch_selected = " --Please select an option --"
+    if student.branch=='':
+      branch_selected = ""
       branch_list.insert(0,branch_selected)
     else:
       branch_selected = student.branch
@@ -78,7 +88,7 @@ def studentEditProfile(request):
     return render(request, 'edit_mystudent_profile.html', 
       {'first_name':student.first_name, 'last_name':student.last_name, 'gender':student.gender, 'dob':student.dob, 'roll_no':student.roll_no, 
       'branch': student.branch, 'semester':student.semester, 'cgpa': student.cgpa, 
-      'contact_no': student.contact, 'branch_list':branch_list,'exp':exp})
+      'contact_no': student.contact, 'yop':student.year_of_pass_out, 'desc':student.aboutme, 'branch_list':branch_list, 'exp':exp, 'clubs':clubs, 'skills':skills, 'edu':education, 'courses': courses})
 
 
 
@@ -91,7 +101,6 @@ def studentAddExp(request):
     start_date = request.POST["start"]
     end_date = request.POST["end"]
     work_exp = WorkExperience(user=request.user, role=role, company=company, location=location, employment_type=employment_type, start_date=start_date, end_date=end_date)
-    print(work_exp)
     work_exp.save()
     return redirect('studentEditProfile')
 
