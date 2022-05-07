@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Sum
 from django.template.defaulttags import register
 
-from datetime import date
+from datetime import date, datetime
 
 from organization.models import Organization
 from student.models import Student
@@ -127,6 +127,9 @@ def organizationJob(request):
       onsite_remote = onsite_remote,
       location_of_work = location,
       site_url = Organization.objects.get(user=request.user).website_url,
+      qualification = qualification,
+      skills_required = skills_required,
+      posted_on = datetime.datetime.now()
     )
     job.save()
     # form = dict(request.POST)

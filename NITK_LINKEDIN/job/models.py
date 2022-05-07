@@ -15,4 +15,4 @@ class Job(models.Model):
   qualification = models.CharField(max_length=500, null=True, blank=True)
   job_description = models.TextField()
   skills_required = models.TextField()
-  
+  posted_on = models.DateTimeField(auto_now_add=True, null=True, blank=True)
