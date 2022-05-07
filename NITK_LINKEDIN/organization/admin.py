@@ -8,16 +8,16 @@ from organization.models import Organization
 class OrganizationModelAdminConfig(admin.ModelAdmin):
   search_fields = ('org_name', 'user')
   ordering = ('org_name','user')
-  list_display = ('user', 'org_name',)
+  list_display = ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic',)
  
   fieldsets = (
-    (None, {'fields': ('user', 'org_name')}),
+    (None, {'fields': ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic',)}),
   )
   
   add_fieldsets = (
     (None, {
       'classes' : ('wide',),
-      'fields' : ('user', 'org_name',),
+      'fields' : ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic',),
       }),
   )
 

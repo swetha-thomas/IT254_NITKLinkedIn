@@ -1,12 +1,60 @@
 from django.shortcuts import render, redirect
+from django.db.models import Sum
+from django.template.defaulttags import register
+
+from datetime import date
 
 from organization.models import Organization
-
+from student.models import Student
+from job.models import Job
 # Create your views here.
 
 def organizationHome(request):
   organization = Organization.objects.get(user=request.user)
-  return render(request, 'organization_home.html', {'orgName':organization.org_name})
+  students = Student.objects.all()
+  number_of_students = students.count()
+  branchesDict = Student.objects.order_by().values('branch').distinct()
+  branches = []
+  for branch in branchesDict:
+    branches.append(branch['branch'])
+  
+  past_7_years = {}
+  for i in range(7):
+    past_7_years[i] = {'year_number': date.today().year - i}
+    # past_7_years[i] = {}
+    
+    
+    students_of_this_year = Student.objects.all().filter(year_of_pass_out=date.today().year-i)
+    branches_of_this_year = students_of_this_year.order_by().values('branch').distinct()
+    number_of_students_of_this_year = students_of_this_year.count()
+    avg_cgpa_of_students_of_this_year = round(students_of_this_year.aggregate(Sum('cgpa'))['cgpa__sum'] / number_of_students_of_this_year, 2)
+    marks_of_this_year = {}
+    for branch in branches_of_this_year:
+      if branch['branch'] not in marks_of_this_year.keys():
+        marks_of_this_year[branch['branch']] = 0
+        number_of_students_of_this_branch_of_this_year = students_of_this_year.filter(branch=branch['branch']).count()
+        marks_of_this_year[branch['branch']] += round(students_of_this_year.filter(branch=branch['branch']).aggregate(Sum('cgpa'))['cgpa__sum'] / number_of_students_of_this_branch_of_this_year, 2)
+    
+    past_7_years[i]['students'] = students_of_this_year
+    past_7_years[i]['branches'] = branches_of_this_year
+    past_7_years[i]['num_students'] = number_of_students_of_this_year
+    past_7_years[i]['avg_cgpa'] = avg_cgpa_of_students_of_this_year
+    past_7_years[i]['marks'] = marks_of_this_year
+  
+  print(past_7_years, sep="\n", end="\n")
+  
+  return render(request, 'organization_home.html', {
+    'orgName': organization.org_name,
+    'organizationProfilePic': organization.profile_pic,
+    'numOfStudentsFromCollege': number_of_students,
+    'avgCGPAOfStudents': past_7_years[0]['avg_cgpa'],
+    'branches': past_7_years[0]['branches'],
+    'marks': past_7_years[0]['marks'],
+    'num_of_years': len(past_7_years),
+    'past_years': past_7_years,
+    
+  })
+
 
 def organizationEditProfile(request):
   if request.method == 'POST':
@@ -43,12 +91,44 @@ def organizationEditProfile(request):
       company_type_list.insert(0,company_type_selected)
       company_type_list.pop(ind+1)
 
-    return render(request, 'edit_myorg_profile.html', 
-      {'orgName':org.org_name, 'industry':org.industry, 'company_size':org.company_size, 
-      'company_type': org.company_type, 'locations':org.locations, 'web_url': org.website_url, 
-      'contact_no': org.contact_no, 'desc':org.company_desc, 'size_list':company_size_list, 'type_list':company_type_list})
+    return render(request, 'edit_myorg_profile.html', {
+      'orgName':org.org_name, 
+      'industry':org.industry, 
+      'company_size':org.company_size, 
+      'company_type': org.company_type, 
+      'locations':org.locations, 
+      'web_url': org.website_url, 
+      'contact_no': org.contact_no, 
+      'desc':org.company_desc, 
+      'size_list':company_size_list, 
+      'type_list':company_type_list
+    })
 
-def organizationJobs(request):
+def organizationJob(request):
+  if(request.method == 'POST'):
+    
+    job_level = request.POST['job_level']
+    job_type = request.POST['job_type']
+    job_name = request.POST['job_name'].strip()
+    qualification = request.POST['qualification'].strip()
+    onsite_remote = request.POST['onsite_remote']
+    location = request.POST['location_of_work']
+    job_description = request.POST['job_description']
+    skills_required = request.POST['skills_required'].strip()
+    
+    job = Job.objects.create(
+      job_name = job_name,
+      company = Organization.objects.get(user=request.user),
+      job_description = job_description,
+      job_level = job_level,
+      job_type = job_type,
+      onsite_remote = onsite_remote,
+      location_of_work = location,
+      site_url = Organization.objects.get(user=request.user).website_url,
+    )
+    job.save()
+    # form = dict(request.POST)
+    # print(form)
   return render(request, 'organization_jobs.html')
 
 def organizationProfile(request):
@@ -58,3 +138,15 @@ def organizationProfile(request):
       'company_type': org.company_type, 'locations':org.locations, 'web_url': org.website_url, 
       'contact_no': org.contact_no, 'desc':org.company_desc})
 
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+  
+@register.filter
+def div( value, arg ):
+    try:
+        value = int( value )
+        arg = int( arg )
+        if arg: return value / arg
+    except: pass
+    return ''
