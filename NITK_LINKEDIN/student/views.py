@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.shortcuts import render, redirect
 from job.models import Job
 from student.models import Student, WorkExperience, Clubs, Skills, Education, Courses
@@ -20,19 +21,23 @@ def studentHome(request):
 
 def studentJob(request):
   form = dict(request.POST)
+  
   student=Student.objects.get(user=request.user)
-
-  experience_level = form.get('experience_level')
+  job_level = form.get('job_level')
   company = form.get('company')
   job_type = form.get('job_type')
   onsite_remote = form.get('onsite_remote')
+  date = form.get('date')
   
   filtered_jobs = set({})
   for job in Job.objects.all():
-    if ((experience_level is None or job.job_level in experience_level) and (company is None or job.company.org_name in company) and (job_type is None or job.job_type in job_type) and (onsite_remote is None or job.onsite_remote in onsite_remote)):
+    if ((job_level is None or job.job_level in job_level) and (company is None or job.company.org_name in company) and (job_type is None or job.job_type in job_type) and (onsite_remote is None or job.onsite_remote in onsite_remote)
+        and (date is None or check_date(job.posted_on, date))):
       filtered_jobs.add(job)
+      
   print()
   print(filtered_jobs)
+  # print(form)
   
   return render(request, "student_jobs.html", {'jobs' : filtered_jobs, 'first_name':student.first_name, 'last_name':student.last_name})
 
@@ -126,3 +131,14 @@ def studentAddCourses(request):
     course = Courses(user=request.user, course_name=course_name, organization=org, start_date=start_date, end_date=end_date)
     course.save()
     return redirect('studentEditProfile')
+  
+# helper
+def check_date(posted_on, date):
+  if(date[0] == "Any Time"):
+    return True
+  
+  curr_date = datetime.now().date()
+  delta = curr_date - posted_on.replace(tzinfo=None).date()
+  if(delta.days < int(date[0])):
+    return True
+  return False

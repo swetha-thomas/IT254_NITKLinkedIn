@@ -130,7 +130,7 @@ def organizationJob(request):
       site_url = Organization.objects.get(user=request.user).website_url,
       qualification = qualification,
       skills_required = skills_required,
-      posted_on = datetime.datetime.now()
+      posted_on = datetime.datetime.now().replace(tzinfo=None)
     )
     job.save()
     # form = dict(request.POST)

@@ -143,6 +143,19 @@
                     Any Time
                   </label>
                 </li>
+
+                {% comment %} <li class="filter-value">
+                  <input
+                    class="dropdown-item radio-input"
+                    type="radio"
+                    name="date"
+                    id="exampleRadios1"
+                    value="0.0416"
+                  />
+                  <label class="dropdown-item label" for="exampleRadios1">
+                    Past 1 hour
+                  </label>
+                </li> {% endcomment %}
                 <li class="filter-value">
                   <input
                     class="dropdown-item radio-input"
@@ -189,14 +202,14 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Experience Level
+                Job Level
               </button>
               <ul class="dropdown-menu">
                 <li class="filter-value">
                   <input
                     type="checkbox"
                     class="check-input"
-                    name="experience_level"
+                    name="job_level"
                     id="exampleCheck1"
                     value="Internship"
                   />
@@ -208,33 +221,33 @@
                   <input
                     type="checkbox"
                     class="check-input"
-                    name="experience_level"
+                    name="job_level"
                     id="exampleCheck2"
                     value="Entry Level"
                     
                   />
                   <label class="dropdown-item label" for="exampleCheck2">
-                    Entry Level
+                    Job
                   </label>
                 </li>
                 <li class="filter-value">
                   <input
                     type="checkbox"
                     class="check-input"
-                    name="experience_level"
+                    name="job_level"
                     id="exampleCheck3"
                     value="Mid-Senior Level"
                     
                   />
                   <label class="dropdown-item label" for="exampleCheck3">
-                    Mid-Senior Level
+                    Freelance
                   </label>
                 </li>
-                <li class="filter-value">
+                {% comment %} <li class="filter-value">
                   <input
                     type="checkbox"
                     class="check-input"
-                    name="experience_level"
+                    name="job_level"
                     id="exampleCheck4"
                     value="Director"
                     
@@ -242,19 +255,19 @@
                   <label class="dropdown-item label" for="exampleCheck4">
                     Director
                   </label>
-                </li>
-                <li class="filter-value">
+                </li> {% endcomment %}
+                {% comment %} <li class="filter-value">
                   <input
                     type="checkbox"
                     class="check-input"
-                    name="experience_level"
+                    name="job_level"
                     id="exampleCheck5"
                     value="Executive"
                   />
                   <label class="dropdown-item label" for="exampleCheck5">
                     Executive
                   </label>
-                </li>
+                </li> {% endcomment %}
               </ul>
             </li>
             <li class="filter-parameter btn-group">
