@@ -23,14 +23,14 @@
                 <div id="navbarSupportedContent" class="collapse navbar-collapse">		
                     <ul class="nav navbar-nav ">
                         <li><a class="active nav-link" href="{% url 'studentHome' %}"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a class="active nav-link" href="{% url 'studentJobs' %}"><i class="fa fa-briefcase"></i> Get Hired</a></li>
+                        <li><a class="active nav-link" href="{% url 'studentJob' %}"><i class="fa fa-briefcase"></i> Get Hired</a></li>
                     </ul>
                 </div>
                 <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-end">		
                     <ul class="nav">
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{% static 'img/user_pic.jpeg' %}" class="avatar" alt="Avatar"> {{name}} <b class="caret"></b>
+                                <img src="{% static 'img/user_pic.jpeg' %}" class="avatar" alt="Avatar"> {{first_name}} {{last_name}}<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a href="{% url 'studentProfile' %}"><i class="fa fa-user-o"></i>Profile</a></li>
@@ -59,18 +59,29 @@
                         <div class="d-flex mb-3">
                             <h4>My Profile</h4>
                         </div>
-                        <div class="col-md-9"><label class="labels">Name</label><input type="text" class="form-control" placeholder="Name" value={{name}} readonly></div>
                         <div class="row mt-3">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <label class="labels">First Name</label>
+                                <input type="text" class="form-control"  value="{{first_name}}" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">Last Name</label>
+                                <input type="text" class="form-control"  value="{{last_name}}" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-6">
                                 <label class="labels">Gender</label><br>
                                 <input type="text" class="form-control" id="male" name="gender" value="{{gender}}" readonly>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <label class="labels">Date of Birth</label><br>
                                 <input type="date" id="dob" name="dob" class="form-control" value="{{dob}}" readonly><br>
                             </div>
-                            <div class="col-md-9">
-                                <label class="labels">Roll Number</label><input type="text" class="form-control" placeholder="Enter roll number" value="{{roll_no}}" readonly><br>
+                            <div class="col-md-12">
+                                <label class="labels">Roll Number</label>
+                                <input type="text" class="form-control" value="{{roll_no}}" readonly><br>
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">Branch</label><br>
@@ -79,19 +90,15 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Current Semester</label>
-                                <input type="number" class="form-control" placeholder="Enter Semester" value="{{sem}}" readonly>
+                                <input type="number" class="form-control" value="{{semester}}" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">CGPA</label>
-                                <input type="number" class="form-control" placeholder="Enter CGPA" value="{{cgpa}}" readonly><br>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Email ID</label>
-                                <input type="email" class="form-control" placeholder="Enter email id" value={{email}} readonly><br>
+                                <input type="number" class="form-control" value="{{cgpa}}" readonly><br>
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">Mobile Number</label>
-                                <input type="tel" class="form-control" placeholder="Enter mobile number" value="{{mob_no}}" readonly>
+                                <input type="tel" class="form-control"  value="{{contact_no}}" readonly>
                             </div>
                         </div> 
                         <br>

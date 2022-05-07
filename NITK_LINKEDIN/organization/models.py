@@ -15,6 +15,7 @@ class Organization(models.Model):
   website_url = models.CharField(max_length= 100, null=True)
   contact_no = models.CharField(max_length= 20, blank=False, null=True)
   company_desc = models.CharField(max_length= 200, null=True)
+  year_of_pass_out = models.IntegerField(blank=True, null=True, default=2000)
   profile_pic = models.ImageField(upload_to='org_profile_uploads/', blank=True, default="default_org_profile.jpeg")
 
   def __str__(self):

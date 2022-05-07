@@ -25,14 +25,14 @@
           <ul class="nav navbar-nav ">
             <li><a class="active nav-link" href="{% url 'studentHome' %}"><i class="fa fa-home"></i> Home</a></li>
             <!-- <li><a class="active nav-link" href="student_connect.html"><i class="fa fa-users"></i> Connect</a></li> -->
-            <li><a class="active nav-link" href="{% url 'studentJobs' %}"><i class="fa fa-briefcase"></i> Get Hired</a></li>
+            <li><a class="active nav-link" href="{% url 'studentJob' %}"><i class="fa fa-briefcase"></i> Get Hired</a></li>
           </ul>
         </div>
         <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-end">		
           <ul class="nav">
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{% static 'img/user_pic.jpeg' %}" class="avatar" alt="Avatar"> {{name}} <b class="caret"></b>
+                <img src="{% static 'img/user_pic.jpeg' %}" class="avatar" alt="Avatar"> {{first_name}} {{last_name}} <b class="caret"></b>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a href="{% url 'studentProfile' %}"><i class="fa fa-user-o"></i>Profile</a></li>
@@ -49,7 +49,8 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-md-2">
-          <div class="d-flex flex-column align-items-center text-center"><img class="border rounded-circle mt-5" width="100%" src="{% static 'img/user_pic.jpeg' %}">
+          <div class="d-flex flex-column align-items-center text-center">
+            <img class="border rounded-circle mt-5" width="100%" src="{% static 'img/user_pic.jpeg' %}">
             <span class="font-weight-bold"><br>{{name}}</span>
             <span class="text-black-50">{{email}}</span>
           </div>
@@ -59,65 +60,69 @@
             <div class="d-flex mb-3">
               <h4>My Profile</h4>
             </div>
-            <div class="col-md-9">
-              <label class="labels">Name</label>
-              <input type="text" class="form-control" placeholder="Name" value={{name}} required>
+            <form action="" method="POST">
+              {% csrf_token %}
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <label class="labels">First Name</label>
+                <input type="text" class="form-control" placeholder="Name" value="{{ first_name }}" readonly>
+              </div>
+              <div class="col-md-6">
+                <label class="labels">Last Name</label>
+                <input type="text" class="form-control" placeholder="Name" value="{{ last_name }}" readonly>
+              </div>
             </div>
+            
             <div class="row mt-3">
               <div class="col-md-4">
                 <label class="labels">Gender</label><br>
-                <input type="radio" id="male" name="gender" value="Male">
+                <input type="radio" id="male" name="gender" value="Male" {% if gender != 'Female' %} checked {% endif %}
+                required>
                 <label for="male">Male</label> 
-                <input type="radio" id="female" name="gender" value="Female">
+                <input type="radio" id="female" name="gender" value="Female" {% if gender != 'Male' %} checked {% endif %}
+                required>
                 <label for="female">Female</label><br><br>
               </div>
               <div class="col-md-5">
                 <label class="labels">Date of Birth</label><br>
-                <input type="date" id="dob" name="dob" class="form-control"><br>
+                <input type="date" id="dob" name="dob" class="form-control" value="{{ dob }}" required><br>
               </div>
               <div class="col-md-9">
                 <label class="labels">Roll Number</label>
-                <input type="text" class="form-control" placeholder="Enter roll number" value="" required><br>
+                <input type="text" class="form-control" name="roll_no" placeholder="Enter roll number" value="{{ roll_no }}" required><br>
               </div>
               <div class="col-md-12">
                 <label class="labels">Branch</label><br>
                 <select name="branch" id="branch" class="form-select">
-                  <option selected="true" disabled="true">--Please select your branch--</option>
-                  <option value="Chemical Engineering">Chemical Engineering</option>
-                  <option value="Civil Engineering">Civil Engineering</option>
-                  <option value="Computer Science and Engineering">Computer Science and Engineering</option>
-                  <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
-                  <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
-                  <option value="Information Technology">Information Technology</option>
-                  <option value="Mechanical Engineering">Mechanical Engineering</option>
-                  <option value="Metallurgical and Materials Engineering">Metallurgical and Materials Engineering</option>
-                  <option value="Mining Engineering">Mining Engineering</option>
-                </select>        
+                  <option value="{{ branch_list | first }}" selected disabled>{{ branch_list | first }}</option>
+                  {% for row in branch_list %}
+                  {% if not forloop.first %}
+                  <option value="{{row}}">{{ row }}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
                 <br>
               </div>
               <div class="col-md-6">
                 <label class="labels">Current Semester</label>
-                <input type="number" class="form-control" placeholder="Enter Semester" value="">
+                <input type="number" name="semester" class="form-control" placeholder="Enter Semester" value="{{semester}}" required>
               </div>
               <div class="col-md-6">
                 <label class="labels">CGPA</label>
-                <input type="number" class="form-control" placeholder="Enter CGPA" value=""><br>
-              </div>
-              <div class="col-md-12">
-                <label class="labels">Email ID</label>
-                <input type="email" class="form-control" placeholder="Enter email id" value={{email}} required><br>
+                <input type="text" name="cgpa" class="form-control" placeholder="Enter CGPA" value="{{cgpa}}"><br>
               </div>
               <div class="col-md-12">
                 <label class="labels">Mobile Number</label>
-                <input type="tel" class="form-control" placeholder="Enter mobile number" value="" required>
+                <input type="tel" name="contact" class="form-control" placeholder="Enter mobile number" value="{{contact_no}}" required>
               </div>
             </div> 
             <br>
             <label class="labels">About Me</label>
             <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 100%;" placeholder="Brief Description about Yourself"></textarea>
             <div class="mt-5 text-center">
-              <button class="btn btn-primary profile-button" type="button">Save Profile</button>
+              <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
             </div>
+          </form>
           </div>
         </div>
 
@@ -143,46 +148,37 @@
                       <h5 class="modal-title" id="exampleModalLabel">Add Work Experience</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form id="work_exp" method="post" action="{% url 'studentAddExp' %}">
                     <div class="modal-body">
-                      Role: <input type="text"><br><br>
-                      Company: <input type="text"><br><br>
-                      Location: <input type="text"><br><br>
-                      Employment Type: <input type="text"><br><br>
-                      Start Date: <input type="date"><br><br>
-                      End Date: <input type="date">
+                      {% csrf_token %}
+                      Role: <input type="text" name="role"><br><br>
+                      Company: <input type="text" name="company"><br><br>
+                      Location: <input type="text" name="location"><br><br>
+                      Employment Type: <input type="text" name="employment"><br><br>
+                      Start Date: <input type="date" name="start"><br><br>
+                      End Date: <input type="date" name="end">
+                      
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-primary">Add</button>
                     </div>
+                  </form>
                   </div>
                 </div>
               </div>
               <button id="expbutton" onclick="myFunction_experience();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Work Experience</button>
               <div id="experience" style="display: none">
+                {% for row in exp %}
                 <div class="d-flex flex-row mt-3">
                   <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{role}}</span>
-                    <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                    <span class="font-weight-bold d-block">{{row.role}}</span>
+                    <span class="d-block text-black-50 labels">{{row.company}} ({{row.location}})</span>
+                    <span class="d-block text-black-50 labels">{{row.start_date}} -- {{row.end_date}}</span>
                   </div>
                 </div>
                 <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{role}}</span>
-                    <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>
-                </div>
-                <hr>
-                <div class="d-flex flex-row mt-3 ">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{role}}</span>
-                    <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>
-                </div>          
+                {% endfor %}
               </div>      
             </div>
             <br><br>
@@ -205,45 +201,35 @@
                       <h5 class="modal-title" id="exampleModalLabel">Add Club</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form id="clubs" method="post" action="{% url 'studentAddClub' %}">
                     <div class="modal-body">
-                      Role: <input type="text"><br><br>
-                      Club Name: <input type="text"><br><br>
-                      Start Date: <input type="date"><br><br>
-                      End Date: <input type="date">
+                      {% csrf_token %}
+                      Role: <input type="text" name="role"><br><br>
+                      Club Name: <input type="text" name="club_name"><br><br>
+                      Start Date: <input type="date" name="start"><br><br>
+                      End Date: <input type="date" name="end">
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-primary">Add</button>
                     </div>
+                  </form>
                   </div>
                 </div>
               </div>          
                         
               <button id="clubbutton" onclick="myFunction_club();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Clubs</button>
               <div id="club" style="display: None;">
+                {% for row in clubs %}
                 <div class="d-flex flex-row mt-3">
                   <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{role}}</span>
-                    <span class="d-block text-black-50 labels">{{club_name}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                    <span class="font-weight-bold d-block">{{row.role}}</span>
+                    <span class="d-block text-black-50 labels">{{row.club_name}}</span>
+                    <span class="d-block text-black-50 labels">{{row.start_date}} - {{row.end_date}}</span>
                   </div>                        
                 </div>
                 <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{role}}</span>
-                    <span class="d-block text-black-50 labels">{{club_name}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>                        
-                </div>
-                <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{role}}</span>
-                    <span class="d-block text-black-50 labels">{{club_name}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>                        
-                </div>
+              {% endfor %}
               </div>
             </div>
             <br><br>
@@ -266,35 +252,29 @@
                       <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form id="skills" method="post" action="{% url 'studentAddSkills' %}">
                     <div class="modal-body">
-                      Skill: <input type="text"><br><br>
+                      {% csrf_token %}
+                      Skill: <input type="text" name="skills"><br><br>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-primary">Add</button>
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>
               <button id="skillbutton" onclick="myFunction_skills();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Skills</button>
               <div id="skill" style="display: None;">
+                {% for row in skills %}
                 <div class="d-flex flex-row mt-3">
                     <div class="ml-1">
-                      <span class="font-weight-bold d-block">{{skill}}</span>
+                      <span class="font-weight-bold d-block">{{row.skill}}</span>
                     </div>
                 </div>
                 <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{skill}}</span>
-                  </div>
-                </div>
-                <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{skill}}</span>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
             </div>
             <br><br>
@@ -317,44 +297,35 @@
                       <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form id="education" method="post" action="{% url 'studentAddEducation' %}">
+
                     <div class="modal-body">
-                      Institute: <input type="text"><br><br>
-                      Degree: <input type="text"><br><br>
-                      Start Date: <input type="date"><br><br>
-                      End Date: <input type="date">
+                      {% csrf_token %}
+                      Institute: <input type="text" name="institute"><br><br>
+                      Degree: <input type="text" name="degree"><br><br>
+                      Start Date: <input type="date" name="start"><br><br>
+                      End Date: <input type="date" name="end">
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-primary">Add</button>
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>                       
               <button id="edubutton" onclick="myFunction_edu();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Education</button>
               <div id="edu" style="display: None;">
+                {% for row in edu %}
                 <div class="d-flex flex-row mt-3">
                   <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{institute}}</span>
-                    <span class="d-block text-black-50 labels">{{degree}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                    <span class="font-weight-bold d-block">{{row.institute}}</span>
+                    <span class="d-block text-black-50 labels">{{row.degree}}</span>
+                    <span class="d-block text-black-50 labels">{{row.start_date}} -- {{row.end_date}}</span>
                   </div>
                 </div>                        
                 <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{institute}}</span>
-                    <span class="d-block text-black-50 labels">{{degree}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>
-                </div> 
-                <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{institute}}</span>
-                    <span class="d-block text-black-50 labels">{{degree}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>
-                </div> 
+                {% endfor %}
               </div>
             </div>  
             <br><br> 
@@ -378,44 +349,36 @@
                       <h5 class="modal-title" id="exampleModalLabel">Add Courses and Certifications</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form id="courses" method="post" action="{% url 'studentAddCourses' %}">
+
                     <div class="modal-body">
-                      Name: <input type="text"><br><br>
-                      Organization/Institute: <input type="text"><br><br>
-                      Start Date: <input type="date"><br><br>
-                      End Date: <input type="date">
+                      {% csrf_token %}
+
+                      Name: <input type="text" name="course_name"><br><br>
+                      Organization/Institute: <input type="text" name="organization"><br><br>
+                      Start Date: <input type="date" name="start"><br><br>
+                      End Date: <input type="date" name="end">
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-primary">Add</button>
                     </div>
+                    </form>
                   </div>  
                 </div>
               </div>              
               <button id="course_button" onclick="myFunction_courses();" class="form-select" style="background-color: rgb(233, 233, 233);">Show My Courses and Certifications</button>
               <div id="course" style="display: None;">
+                {% for row in courses %}
                 <div class="d-flex flex-row mt-3">
                   <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{name}}</span>
-                    <span class="d-block text-black-50 labels">{{org_inst}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
+                    <span class="font-weight-bold d-block">{{row.name}}</span>
+                    <span class="d-block text-black-50 labels">{{row.org_inst}}</span>
+                    <span class="d-block text-black-50 labels">{{row.start_date}} -- {{row.end_date}}</span>
                   </div>                        
                 </div>
                 <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{name}}</span>
-                    <span class="d-block text-black-50 labels">{{org_inst}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>                        
-                </div>
-                <hr>
-                <div class="d-flex flex-row mt-3">
-                  <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{name}}</span>
-                    <span class="d-block text-black-50 labels">{{org_inst}}</span>
-                    <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                  </div>                        
-                </div>
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -426,5 +389,5 @@
   <footer class="page-footer">
     Developed by: Advaith, Swetha &amp; Akheel ©
   </footer>
-  <script src="../static/javascript/edit_profile.js"></script>
+  <script src="{% static 'javascript/edit_profile.js' %}"></script>
 </html>                            
