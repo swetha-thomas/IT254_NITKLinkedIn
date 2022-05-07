@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from job.models import Job
-from student.models import Student
+from student.models import Student, WorkExperience, Clubs, Skills, Education, Courses
+
 from django.http import QueryDict
 
 # Create your views here.
@@ -8,7 +9,8 @@ from django.http import QueryDict
 def studentHome(request):
   student = Student.objects.get(user=request.user)
   return render(request, 'student_home.html', {
-    'studentName': student.username,
+    'studentFirstName': student.first_name,
+    'studentLastName': student.last_name,
     'studentProfilePic': student.profile_pic,
     'studentSem': student.semester,
     'studentSemSuffix': student.semesterSuffix,
@@ -17,37 +19,110 @@ def studentHome(request):
   })
 
 def studentJob(request):
-  
   form = dict(request.POST)
-  # print(form)
-  
+  student=Student.objects.get(user=request.user)
+
   experience_level = form.get('experience_level')
   company = form.get('company')
-  # print(company)
   job_type = form.get('job_type')
   onsite_remote = form.get('onsite_remote')
   
   filtered_jobs = set({})
   for job in Job.objects.all():
-    # print(job.job_type)
-    # print(job.company)
-    # print(job.job_level)
-    # print()
-    # print()
-    
-    # onsite_remote has to be added to models.py of job because currently its is just location_of_work, so cannot match with that
     if ((experience_level is None or job.job_level in experience_level) and (company is None or job.company.org_name in company) and (job_type is None or job.job_type in job_type) and (onsite_remote is None or job.onsite_remote in onsite_remote)):
-      # print(job)
-      # print(job.company.org_name)
       filtered_jobs.add(job)
   print()
   print(filtered_jobs)
   
-  return render(request, "student_jobs.html", {'jobs' : filtered_jobs})
-# {'filtered_jobs': filtered_jobs}
+  return render(request, "student_jobs.html", {'jobs' : filtered_jobs, 'first_name':student.first_name, 'last_name':student.last_name})
 
 def studentProfile(request):
-  return render(request, 'view_mystudent_profile.html')
+  student=Student.objects.get(user=request.user)
+  return render(request, 'view_mystudent_profile.html', 
+      {'first_name':student.first_name, 'last_name':student.last_name, 'gender':student.gender, 'dob':student.dob, 'roll_no':student.roll_no, 
+      'branch': student.branch, 'semester':student.semester, 'cgpa': student.cgpa, 
+      'contact_no': student.contact})
+
 
 def studentEditProfile(request):
-  return render(request, 'edit_mystudent_profile.html')
+  if request.method == 'POST':
+    gender = request.POST["gender"]
+    dob = request.POST["dob"]
+    roll_no = request.POST["roll_no"]
+    branch = request.POST["branch"] 
+    semester = request.POST["semester"]
+    cgpa = request.POST["cgpa"]
+    contact_no = request.POST["contact"]
+    
+
+    Student.objects.filter(user=request.user).update(gender=gender, dob=dob, roll_no=roll_no, branch=branch, semester=semester, cgpa=cgpa, contact=contact_no)
+    return redirect('studentProfile')
+  
+  elif request.method == 'GET':
+    student=Student.objects.get(user=request.user)
+    exp=WorkExperience.objects.all().filter(user=request.user)
+    branch_list=["Chemical Engineering","Civil Engineering","Computer Science and Engineering","Electrical and Electronics Engineering","Electronics and Communication Engineering","Information Technology","Mechanical Engineering","Metallurgical and Materials Engineering","Mining Engineering"]
+    if student.branch==None:
+      branch_selected = " --Please select an option --"
+      branch_list.insert(0,branch_selected)
+    else:
+      branch_selected = student.branch
+      ind = branch_list.index(branch_selected)
+      branch_list.insert(0,branch_selected)
+      branch_list.pop(ind+1)
+    return render(request, 'edit_mystudent_profile.html', 
+      {'first_name':student.first_name, 'last_name':student.last_name, 'gender':student.gender, 'dob':student.dob, 'roll_no':student.roll_no, 
+      'branch': student.branch, 'semester':student.semester, 'cgpa': student.cgpa, 
+      'contact_no': student.contact, 'branch_list':branch_list,'exp':exp})
+
+
+
+def studentAddExp(request):
+  if request.method == 'POST':
+    role = request.POST["role"]
+    company = request.POST["company"]
+    location = request.POST["location"]
+    employment_type = request.POST["employment"]
+    start_date = request.POST["start"]
+    end_date = request.POST["end"]
+    work_exp = WorkExperience(user=request.user, role=role, company=company, location=location, employment_type=employment_type, start_date=start_date, end_date=end_date)
+    print(work_exp)
+    work_exp.save()
+    return redirect('studentEditProfile')
+
+def studentAddClub(request):
+  if request.method == 'POST':
+    role = request.POST["role"]
+    club_name = request.POST["club_name"]
+    start_date = request.POST["start"]
+    end_date = request.POST["end"]
+    club = Clubs(user=request.user, role=role, club_name=club_name, start_date=start_date, end_date=end_date)
+    club.save()
+    return redirect('studentEditProfile')
+  
+def studentAddSkills(request):
+  if request.method == 'POST':
+    skill_desc = request.POST["skills"]
+    skill_obj = Skills(user=request.user, skill=skill_desc)
+    skill_obj.save()
+    return redirect('studentEditProfile')
+
+def studentAddEducation(request):
+  if request.method == 'POST':
+    institute = request.POST["institute"]
+    degree = request.POST["degree"]
+    start_date = request.POST["start"]
+    end_date = request.POST["end"]
+    edu = Education(user=request.user, institute=institute, degree=degree, start_date=start_date, end_date=end_date)
+    edu.save()
+    return redirect('studentEditProfile')
+
+def studentAddCourses(request):
+  if request.method == 'POST':
+    course_name = request.POST["course_name"]
+    org = request.POST["organization"]
+    start_date = request.POST["start"]
+    end_date = request.POST["end"]
+    course = Courses(user=request.user, course_name=course_name, organization=org, start_date=start_date, end_date=end_date)
+    course.save()
+    return redirect('studentEditProfile')
