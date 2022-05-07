@@ -3,7 +3,7 @@ from django.db.models import Sum
 
 from organization.models import Organization
 from student.models import Student
-
+from job.models import Job
 # Create your views here.
 
 def organizationHome(request):
@@ -23,6 +23,7 @@ def organizationHome(request):
     'avgCGPAOfStudents': avg_cgpa_of_students,
     'branches': branches,
   })
+
 
 def organizationEditProfile(request):
   if request.method == 'POST':
@@ -64,7 +65,30 @@ def organizationEditProfile(request):
       'company_type': org.company_type, 'locations':org.locations, 'web_url': org.website_url, 
       'contact_no': org.contact_no, 'desc':org.company_desc, 'size_list':company_size_list, 'type_list':company_type_list})
 
-def organizationJobs(request):
+def organizationJob(request):
+  if(request.method == 'POST'):
+    
+    job_level = request.POST['job_level']
+    job_type = request.POST['job_type']
+    job_name = request.POST['job_name'].strip()
+    qualification = request.POST['qualification'].strip()
+    onsite_remote = request.POST['onsite_remote']
+    location = request.POST['location_of_work']
+    job_description = request.POST['job_description']
+    skills_required = request.POST['skills_required'].strip()
+    
+    job = Job.objects.create(job_name = job_name,
+                             company = Organization.objects.get(user=request.user),
+                             job_description = job_description,
+                             job_level = job_level,
+                             job_type = job_type,
+                             onsite_remote = onsite_remote,
+                             location_of_work = location,
+                             site_url = Organization.objects.get(user=request.user).website_url,
+                             )
+    job.save()
+    # form = dict(request.POST)
+    # print(form)
   return render(request, 'organization_jobs.html')
 
 def organizationProfile(request):

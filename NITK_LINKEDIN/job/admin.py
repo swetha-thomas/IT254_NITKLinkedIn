@@ -6,18 +6,18 @@ from .models import Job
 class JobModelAdminConfig(admin.ModelAdmin):
   search_fields = ('job_name', 'company', 'job_type',)
   ordering = ('job_name',)
-  list_display = ('job_name', 'company', 'job_type', 'job_level', 'site_url')
+  list_display = ('job_name', 'company', 'job_type', 'job_level', 'site_url', 'onsite_remote')
  
   fieldsets = (
     (None, {'fields': ('job_name', 'company')}),
     ('Job Specifics', {'fields': ('job_type', 'job_level')}),
-    ('Job Details', {'fields': ('location_of_work', 'site_url', 'job_description')}),
+    ('Job Details', {'fields': ('location_of_work', 'site_url', 'job_description', 'onsite_remote')}),
   )
   
   add_fieldsets = (
     (None, {
       'classes' : ('wide',),
-      'fields' : ('job_name', 'company', 'location_of_work', 'job_type', 'job_level', 'site_url', 'job_description'),
+      'fields' : ('job_name', 'company', 'location_of_work', 'job_type', 'job_level', 'site_url', 'job_description', 'onsite_remote'),
       }),
   )
 
