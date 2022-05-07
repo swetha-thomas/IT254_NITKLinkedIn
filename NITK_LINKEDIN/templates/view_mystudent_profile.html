@@ -77,11 +77,15 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Date of Birth</label><br>
-                                <input type="date" id="dob" name="dob" class="form-control" value="{{dob}}" readonly><br>
+                                <input type="date" id="dob" name="dob" class="form-control" value="{{ dob | date:'Y-m-d' }}" readonly><br>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label class="labels">Roll Number</label>
                                 <input type="text" class="form-control" value="{{roll_no}}" readonly><br>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">Year of Passing</label><br>
+                                <input type="number" id="yop" name="yop" class="form-control" value="{{ yop }}" readonly><br>
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">Branch</label><br>
@@ -103,7 +107,7 @@
                         </div> 
                         <br>
                         <label class="labels">About Me</label>
-                        <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 100%;" value="{{desc}}" readonly></textarea>
+                        <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 100%;"  readonly>{{ desc }}</textarea>
                     </div>
                 </div>
 
@@ -118,30 +122,17 @@
                             <br>
                             <button id="expbutton" onclick="myFunction_experience();" class="form-select" style="background-color: rgb(233, 233, 233);">Show  Work Experience</button>
                             <div id="experience" style="display: none">
+                                {% for row in exp %}
                                 <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{role}}</span>
-                                        <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>
+                                  <div class="ml-1">
+                                    <span class="font-weight-bold d-block">{{row.role}}</span>
+                                    <span class="d-block text-black-50 labels">{{row.company}} ({{row.location}})</span>
+                                    <span class="d-block text-black-50 labels">{{row.start_date}} -- {{row.end_date}}</span>
+                                  </div>
                                 </div>
                                 <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{role}}</span>
-                                        <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{role}}</span>
-                                        <span class="d-block text-black-50 labels">{{company}} ({{location}})</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>
-                                </div>
-                            </div>           
+                                {% endfor %}
+                            </div>   
                         </div>
                         <br><br>
                         
@@ -153,30 +144,17 @@
                             <br>
                             <button id="clubbutton" onclick="myFunction_club();" class="form-select" style="background-color: rgb(233, 233, 233);">Show  Clubs</button>
                             <div id="club" style="display: None;">
+                                {% for row in clubs %}
                                 <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{role}}</span>
-                                        <span class="d-block text-black-50 labels">{{club_name}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
+                                  <div class="ml-1">
+                                    <span class="font-weight-bold d-block">{{row.role}}</span>
+                                    <span class="d-block text-black-50 labels">{{row.club_name}}</span>
+                                    <span class="d-block text-black-50 labels">{{row.start_date}} - {{row.end_date}}</span>
+                                  </div>                        
                                 </div>
                                 <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{role}}</span>
-                                        <span class="d-block text-black-50 labels">{{club_name}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
-                                </div>
-                                <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{role}}</span>
-                                        <span class="d-block text-black-50 labels">{{club_name}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
-                                </div>
-                            </div>
+                              {% endfor %}
+                              </div>
                         </div>
                         <br><br>
 
@@ -188,24 +166,15 @@
                         <br>   
                         <button id="skillbutton" onclick="myFunction_skills();" class="form-select" style="background-color: rgb(233, 233, 233);">Show  Skills</button>
                         <div id="skill" style="display: None;">
+                            {% for row in skills %}
                             <div class="d-flex flex-row mt-3">
                                 <div class="ml-1">
-                                    <span class="font-weight-bold d-block">{{skill}}</span>
+                                  <span class="font-weight-bold d-block">{{row.skill}}</span>
                                 </div>
                             </div>
                             <hr>
-                            <div class="d-flex flex-row mt-3">
-                                <div class="ml-1">
-                                    <span class="font-weight-bold d-block">{{skill}}</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="d-flex flex-row mt-3">
-                                <div class="ml-1">
-                                    <span class="font-weight-bold d-block">{{skill}}</span>
-                                </div>
-                            </div>
-                        </div>
+                            {% endfor %}
+                          </div>
                     </div>
                     <br><br>
                     
@@ -217,30 +186,17 @@
                             <br>
                             <button id="edubutton" onclick="myFunction_edu();" class="form-select" style="background-color: rgb(233, 233, 233);">Show  Education</button>
                             <div id="edu" style="display: None;">
+                                {% for row in edu %}
                                 <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{institute}}</span>
-                                        <span class="d-block text-black-50 labels">{{degree}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
-                                </div>
+                                  <div class="ml-1">
+                                    <span class="font-weight-bold d-block">{{row.institute}}</span>
+                                    <span class="d-block text-black-50 labels">{{row.degree}}</span>
+                                    <span class="d-block text-black-50 labels">{{row.start_date}} -- {{row.end_date}}</span>
+                                  </div>
+                                </div>                        
                                 <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{institute}}</span>
-                                        <span class="d-block text-black-50 labels">{{degree}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
-                                </div>
-                                <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{institute}}</span>
-                                        <span class="d-block text-black-50 labels">{{degree}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
-                                </div>
-                            </div>
+                                {% endfor %}
+                              </div>
                         </div>
                         <br><br>
 
@@ -252,30 +208,17 @@
                             <br>      
                             <button id="course_button" onclick="myFunction_courses();" class="form-select" style="background-color: rgb(233, 233, 233);">Show  Courses and Certifications</button>
                             <div id="course" style="display: None;">
+                                {% for row in courses %}
                                 <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{name}}</span>
-                                        <span class="d-block text-black-50 labels">{{org_inst}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
+                                  <div class="ml-1">
+                                    <span class="font-weight-bold d-block">{{row.course_name}}</span>
+                                    <span class="d-block text-black-50 labels">{{row.organization}}</span>
+                                    <span class="d-block text-black-50 labels">{{row.start_date}} -- {{row.end_date}}</span>
+                                  </div>                        
                                 </div>
                                 <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{name}}</span>
-                                        <span class="d-block text-black-50 labels">{{org_inst}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
-                                </div>
-                                <hr>
-                                <div class="d-flex flex-row mt-3">
-                                    <div class="ml-1">
-                                        <span class="font-weight-bold d-block">{{name}}</span>
-                                        <span class="d-block text-black-50 labels">{{org_inst}}</span>
-                                        <span class="d-block text-black-50 labels">{{start_date}} - {{end_date}}</span>
-                                    </div>                        
-                                </div>
-                            </div>
+                                {% endfor %}
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -285,5 +228,6 @@
     <footer class="page-footer">
         Developed by: Advaith, Swetha &amp; Akheel ©
     </footer>
-    <script src="../static/javascript/edit_profile.js"></script>
+    <script src="{% static 'javascript/edit_profile.js' %}"></script>
+
 </html>                            

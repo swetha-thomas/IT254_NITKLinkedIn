@@ -60,7 +60,7 @@
             <div class="d-flex mb-3">
               <h4>My Profile</h4>
             </div>
-            <form action="" method="POST">
+            <form id="profile" action="" method="POST">
               {% csrf_token %}
             <div class="row mt-3">
               <div class="col-md-6">
@@ -74,7 +74,7 @@
             </div>
             
             <div class="row mt-3">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label class="labels">Gender</label><br>
                 <input type="radio" id="male" name="gender" value="Male" {% if gender != 'Female' %} checked {% endif %}
                 required>
@@ -83,18 +83,22 @@
                 required>
                 <label for="female">Female</label><br><br>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <label class="labels">Date of Birth</label><br>
-                <input type="date" id="dob" name="dob" class="form-control" value="{{ dob }}" required><br>
+                <input type="date" id="dob" name="dob" class="form-control" value="{{ dob | date:'Y-m-d' }}" required><br>
               </div>
-              <div class="col-md-9">
+              <div class="col-md-6">
                 <label class="labels">Roll Number</label>
                 <input type="text" class="form-control" name="roll_no" placeholder="Enter roll number" value="{{ roll_no }}" required><br>
+              </div>
+              <div class="col-md-6">
+                <label class="labels">Year of Passing</label><br>
+                <input type="number" id="yop" name="yop" class="form-control" value="{{ yop }}" required><br>
               </div>
               <div class="col-md-12">
                 <label class="labels">Branch</label><br>
                 <select name="branch" id="branch" class="form-select">
-                  <option value="{{ branch_list | first }}" selected disabled>{{ branch_list | first }}</option>
+                  <option value="{{ branch_list | first }}" selected>{{ branch_list | first }}</option>
                   {% for row in branch_list %}
                   {% if not forloop.first %}
                   <option value="{{row}}">{{ row }}</option>
@@ -118,7 +122,7 @@
             </div> 
             <br>
             <label class="labels">About Me</label>
-            <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 100%;" placeholder="Brief Description about Yourself"></textarea>
+            <textarea id="aboutme" name="aboutme" rows="4" style="box-sizing: border-box; width: 100%;" placeholder="Brief Description about Yourself" form="profile" >{{desc}}</textarea>
             <div class="mt-5 text-center">
               <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
             </div>
@@ -372,8 +376,8 @@
                 {% for row in courses %}
                 <div class="d-flex flex-row mt-3">
                   <div class="ml-1">
-                    <span class="font-weight-bold d-block">{{row.name}}</span>
-                    <span class="d-block text-black-50 labels">{{row.org_inst}}</span>
+                    <span class="font-weight-bold d-block">{{row.course_name}}</span>
+                    <span class="d-block text-black-50 labels">{{row.organization}}</span>
                     <span class="d-block text-black-50 labels">{{row.start_date}} -- {{row.end_date}}</span>
                   </div>                        
                 </div>
