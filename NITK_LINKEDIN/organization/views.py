@@ -116,15 +116,16 @@ def organizationJob(request):
     job_description = request.POST['job_description']
     skills_required = request.POST['skills_required'].strip()
     
-    job = Job.objects.create(job_name = job_name,
-                             company = Organization.objects.get(user=request.user),
-                             job_description = job_description,
-                             job_level = job_level,
-                             job_type = job_type,
-                             onsite_remote = onsite_remote,
-                             location_of_work = location,
-                             site_url = Organization.objects.get(user=request.user).website_url,
-                             )
+    job = Job.objects.create(
+      job_name = job_name,
+      company = Organization.objects.get(user=request.user),
+      job_description = job_description,
+      job_level = job_level,
+      job_type = job_type,
+      onsite_remote = onsite_remote,
+      location_of_work = location,
+      site_url = Organization.objects.get(user=request.user).website_url,
+    )
     job.save()
     # form = dict(request.POST)
     # print(form)
