@@ -2,19 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.html import mark_safe
 
+import datetime
+
 # Create your models here.
 
 class Student(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-  first_name = models.CharField(max_length=50, blank=False)
-  last_name = models.CharField(max_length=50, null=True)
-  gender = models.CharField(max_length=6, null=False, blank=True)
-  dob = models.DateField(null=True, blank=True, auto_now_add=False)
-  roll_no = models.CharField(max_length=12, null=True)
-  branch = models.CharField(max_length=50, null=True)
-  semester = models.IntegerField(blank=True, null=True)
-  cgpa = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
-  contact = models.CharField(max_length=15)
+  first_name = models.CharField(max_length=50, blank=False, default="")
+  last_name = models.CharField(max_length=50, null=True,  default="")
+  gender = models.CharField(max_length=6, null=False, blank=True,  default="other")
+  dob = models.DateField(null=True, blank=True, auto_now_add=False, default=datetime.date.today)
+  roll_no = models.CharField(max_length=12, null=True, default="")
+  branch = models.CharField(max_length=50, null=True, default="")
+  semester = models.IntegerField(blank=True, null=True, default=1)
+  cgpa = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True, default=0.0)
+  contact = models.CharField(max_length=15, default="+910000000000")
   year_of_pass_out = models.IntegerField(blank=True, null=True, default=2000)
   profile_pic = models.ImageField(upload_to='student_profile_uploads/', blank=True, default="default_student_profile.jpeg")
   
