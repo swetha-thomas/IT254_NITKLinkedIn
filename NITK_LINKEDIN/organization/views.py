@@ -1,12 +1,28 @@
 from django.shortcuts import render, redirect
+from django.db.models import Sum
 
 from organization.models import Organization
+from student.models import Student
 
 # Create your views here.
 
 def organizationHome(request):
   organization = Organization.objects.get(user=request.user)
-  return render(request, 'organization_home.html', {'orgName':organization.org_name})
+  students = Student.objects.all()
+  number_of_students = students.count()
+  avg_cgpa_of_students = round(Student.objects.aggregate(Sum('cgpa'))['cgpa__sum'] / number_of_students, 2)
+  branchesDict = Student.objects.order_by().values('branch').distinct()
+  branches = []
+  for branch in branchesDict:
+    branches.append(branch['branch'])
+  # print(branches)
+  # work on getting avg of each branch
+  return render(request, 'organization_home.html', {
+    'orgName': organization.org_name,
+    'numOfStudentsFromCollege': number_of_students,
+    'avgCGPAOfStudents': avg_cgpa_of_students,
+    'branches': branches,
+  })
 
 def organizationEditProfile(request):
   if request.method == 'POST':

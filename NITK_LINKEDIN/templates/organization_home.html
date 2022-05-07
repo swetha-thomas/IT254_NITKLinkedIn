@@ -56,44 +56,6 @@
           class="collapse navbar-collapse justify-content-end"
         >
           <ul class="nav navbar-nav">
-            <!-- <li class="main-buttons">
-              <a
-                class="active nav-link"
-                href="organization_find_candidates.html"
-                ><span> Filter </span>
-                <svg
-                  class="navbar-icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="192"
-                  height="192"
-                  fill="#ffffff"
-                  viewBox="0 0 256 256"
-                >
-                  <rect width="256" height="256" fill="none"></rect>
-                  <circle
-                    cx="116"
-                    cy="116"
-                    r="84"
-                    fill="none"
-                    stroke="#ffffff"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="24"
-                  ></circle>
-                  <line
-                    x1="175.4"
-                    y1="175.4"
-                    x2="224"
-                    y2="224"
-                    fill="none"
-                    stroke="#ffffff"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="24"
-                  ></line>
-                </svg>
-              </a>
-            </li> -->
             <li class="main-buttons">
               <a class="active nav-link" href="{% url 'organizationJobs' %}"
                 ><span>Jobs</span><i class="fa fa-briefcase"></i
@@ -166,15 +128,27 @@
         <ul class="info-list">
           <li>
             <strong>
-              <span>Avg cgpa of {{branch}}:</span>
+              <span>Avg cgpa of {{branch}}: </span>
             </strong>
-            <span>{{avg_batch_cgpa}}</span>
+            <span>{{avgCGPAOfStudents}}</span>
           </li>
           <li>
             <strong>
-              <span>current workers from nitk</span>
+              <span>Number of Students in NITK: </span>
             </strong>
-            <span>{{number_of_workers}}</span>
+            <span>{{numOfStudentsFromCollege}}</span>
+          </li>
+          <li>
+            <ul>
+              {% for branch in branches %}
+              <li>
+                <strong>
+                  <span>Average CGPA of {{branch}}: </span>
+                </strong>
+                <span>idk too much logic for me to implement</span>
+              </li>
+              {% endfor %}
+            </ul>
           </li>
         </ul>
       </div>
