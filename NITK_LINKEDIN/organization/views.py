@@ -147,8 +147,7 @@ def organizationJob(request):
   return render(request, 'organization_jobs.html',{'jobs':jobs, 'role':'create', 'user':request.user})
 
 
-def deleteJob(job_id):
-  print(job_id)
+def deleteJob(request, job_id):
   Job.objects.get(id=job_id).delete()
   return redirect('organizationJob')
 
