@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_protect
 
 from organization.models import Organization
 from student.models import Student
+import re
 
 
 # Create your views here.
@@ -15,10 +16,10 @@ from student.models import Student
 def login(request):
   if request.method == 'POST':
     if request.POST.get('user_role') == 'student':
-      email = request.POST["email"]
+      # email = request.POST["email"]
       password = request.POST["password"]
       username = request.POST["username"]
-      user = authenticate(username=username, email=email, password=password)
+      user = authenticate(username=username, password=password)
       if user is not None:
         login_user(request, user)
         print(Student.objects.filter(user=user))
@@ -32,10 +33,10 @@ def login(request):
         messages.info(request, "Invalid Credentials")
         return redirect('login')
     else:
-      email = request.POST["email"]
+      # email = request.POST["email"]
       password = request.POST["password"]
       username = request.POST["username"]
-      user = authenticate(username=username, email=email, password=password)
+      user = authenticate(username=username, password=password)
       if user is not None:
         login_user(request, user)
         print(Organization.objects.filter(user=user))
@@ -66,7 +67,14 @@ def register(request):
       password = request.POST["password"]
       conf_password = request.POST["conf_password"]
       
-      if User.objects.filter(email=email).exists():
+      if(re.search('^[a-z][a-z]+\.[0-9]{3}[a-z]{2}[0-9]{3}@nitk\.edu\.in$', email) is None):
+        messages.info(request, "Email regex mismatch!!")
+        return redirect('register')
+      
+      if(User.objects.filter(username=username).exists()):
+        messages.info(request, "Please choose another username, it already exists")
+        return redirect('register')
+      elif User.objects.filter(email=email).exists():
         messages.info(request, "Email already has an account")
         return redirect('register')
       elif password != conf_password:
@@ -77,6 +85,7 @@ def register(request):
         user.save()
         student = Student(user=user, first_name=fullName[0], last_name=fullName[-1]);
         student.save()
+        messages.info("Successfully Registered!!")
         return redirect('login')
     else:
       username = request.POST['username'].strip()

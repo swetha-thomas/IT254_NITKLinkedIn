@@ -18,6 +18,7 @@ from django.urls import path, include
 
 from NITK_LINKEDIN import settings
 from django.contrib.staticfiles.urls import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', include('login_logout.urls')),
@@ -25,5 +26,6 @@ urlpatterns = [
     path('student/', include('student.urls')),
     path('organization/', include('organization.urls')),
     path('admin/', admin.site.urls),
-    path('student/job/', include('job.urls'))
+    path('student/job/', include('job.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

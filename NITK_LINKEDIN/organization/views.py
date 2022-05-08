@@ -143,28 +143,76 @@ def organizationJob(request):
     job.save()
     # form = dict(request.POST)
     # print(form)
+    organization=Organization.objects.get(user=request.user)
   jobs=Job.objects.all().filter(company=Organization.objects.get(user=request.user))
-  organization=Organization.objects.get(user=request.user)
   return render(request, 'organization_jobs.html',{
+    'jobs':jobs, 'role':'create', 
+    'user':request.user,
     'orgName': organization.org_name,
     'organizationProfilePic': organization.profile_pic,
-    'jobs':jobs,
-    })
+  })
 
 
 def deleteJob(request, job_id):
-  print(job_id)
   Job.objects.get(id=job_id).delete()
   return redirect('organizationJob')
 
 def editJob(request, job_id):
-  # job = Job.objects.get(id=job_id)
-  return render(request, 'organization_jobs.html', {'job':Job.objects.get(id=job_id)})
-  # return redirect('organizationJob')
+  if request.method == 'POST':
+    job_type = request.POST["job_type"]
+    job_level = request.POST["job_level"]
+    job_name = request.POST["job_name"]
+    qualification = request.POST["qualification"] 
+    onsite_remote = request.POST["onsite_remote"] 
+    location_of_work = request.POST["location_of_work"]
+    job_description = request.POST["job_description"]    
+    Job.objects.filter(id=job_id).update(job_type=job_type, job_level=job_level, job_name=job_name, qualification=qualification, onsite_remote = onsite_remote, location_of_work=location_of_work, job_description=job_description)
+    return redirect('organizationJob')
+
+  job_obj = Job.objects.get(id=job_id)
+  job_level_list=["Internship","Job","Freelance"]
+  if job_obj.job_level=='':
+    level_selected = ""
+    job_level_list.insert(0,level_selected)
+  else:
+    level_selected = job_obj.job_level
+    ind = job_level_list.index(level_selected)
+    job_level_list.insert(0,level_selected)
+    job_level_list.pop(ind+1)
+
+  job_type_list=["Part-Time","Full-Time"]
+  if job_obj.job_type=='':
+    type_selected = ""
+    job_type_list.insert(0,type_selected)
+  else:
+    type_selected = job_obj.job_type
+    ind = job_type_list.index(type_selected)
+    job_type_list.insert(0,type_selected)
+    job_type_list.pop(ind+1)
+  
+  job_name_list=["Software Development Engineer (SDE)", "Digital Media & Content Strategist", "Business Analyst", "Product Manager"]
+  if job_obj.job_name=='':
+    name_selected = ""
+    job_name_list.insert(0,name_selected)
+  else:
+    name_selected = job_obj.job_name
+    ind = job_name_list.index(name_selected)
+    job_name_list.insert(0,name_selected)
+    job_name_list.pop(ind+1)
+
+  onsite_remote_list=["On-Site","Remote"]
+  if job_obj.onsite_remote=='':
+    onsite_remote_selected = ""
+    onsite_remote_list.insert(0,onsite_remote_selected)
+  else:
+    onsite_remote_selected = job_obj.onsite_remote
+    ind = onsite_remote_list.index(onsite_remote_selected)
+    onsite_remote_list.insert(0,onsite_remote_selected)
+    onsite_remote_list.pop(ind+1)
+  return render(request, 'organization_jobs.html', {'display_job':job_obj, 'jobs':Job.objects.all().filter(company=Organization.objects.get(user=request.user)), 'role':'edit', 'job_level_list':job_level_list, 'job_type_list':job_type_list, 'job_name_list':job_name_list, 'onsite_remote_list': onsite_remote_list})
 
 def viewJob(request, job_id):
-  return render(request, 'organization_jobs.html', {'display_job':Job.objects.get(id=job_id), 'jobs':Job.objects.all().filter(company=Organization.objects.get(user=request.user))})
-
+  return render(request, 'organization_jobs.html', {'display_job':Job.objects.get(id=job_id), 'jobs':Job.objects.all().filter(company=Organization.objects.get(user=request.user)), 'role':'view'})
 
 def organizationProfile(request):
   org=Organization.objects.get(user=request.user)

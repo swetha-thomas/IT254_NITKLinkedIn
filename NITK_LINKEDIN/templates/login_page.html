@@ -79,7 +79,7 @@
           />
         </div>
 
-        <div class="mb-3 col-xl-3 mx-auto">
+        {% comment %} <div class="mb-3 col-xl-3 mx-auto">
           <input
             type="email"
             class="form-control"
@@ -91,7 +91,7 @@
             name="email"
           />
           <!-- pattern="^[a-z][a-z]+\.[0-9]{3}[a-z]{2}[0-9]{3}@nitk\.edu\.in$" -->
-        </div>
+        </div> {% endcomment %}
         <div class="mb-4 col-xl-3 mx-auto">
           <input
             type="password"
@@ -105,19 +105,9 @@
           <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,20})" -->
         </div>
         <div class="mb-4 col-xl-3 mx-auto d-grid">
-          <button
-            id="signin"
-            type="submit"
-            class="btn btn-primary"
-            value="login"
-          >
-            Sign in
-          </button>
+          <button id="signin" type="submit" class="btn btn-primary" value="login">Sign in</button>
         </div>
 
-        <div class="mb-3 col-xl-3 mx-auto">
-          <a href="#">Forgot Password?</a>
-        </div>
         <div class="col-xl-3 mx-auto">
           <span>Don't have an account?</span>
           <a href="{% url 'register' %}">Register</a>
