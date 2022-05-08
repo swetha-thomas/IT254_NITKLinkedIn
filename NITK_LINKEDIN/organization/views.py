@@ -47,7 +47,11 @@ def organizationHome(request):
     past_7_years[i]['avg_cgpa'] = avg_cgpa_of_students_of_this_year
     past_7_years[i]['marks'] = marks_of_this_year
   
-  print(past_7_years, sep="\n", end="\n")
+  # print(past_7_years, sep="\n", end="\n")
+  
+  jobs_of_company = Job.objects.filter(company=organization)
+  
+  print(jobs_of_company)
   
   return render(request, 'organization_home.html', {
     'orgName': organization.org_name,
