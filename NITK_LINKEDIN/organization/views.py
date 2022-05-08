@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Sum
 from django.template.defaulttags import register
 
@@ -63,7 +63,6 @@ def organizationHome(request):
     'marks': past_7_years[0]['marks'],
     'num_of_years': len(past_7_years),
     'past_years': past_7_years,
-    
   })
 
 
@@ -147,15 +146,18 @@ def organizationJob(request):
   return render(request, 'organization_jobs.html',{'jobs':jobs})
 
 
-def deleteJob(request):
-  print(request)
+def deleteJob(request, job_id):
+  print(job_id)
+  Job.objects.get(id=job_id).delete()
   return redirect('organizationJob')
 
-def editJob(request):
-  return redirect('organizationJob')
+def editJob(request, job_id):
+  # job = Job.objects.get(id=job_id)
+  return render(request, 'organization_jobs.html', {'job':Job.objects.get(id=job_id)})
+  # return redirect('organizationJob')
 
-def viewJob(request):
-  return redirect('organizationJob')
+def viewJob(request, job_id):
+  return render(request, 'organization_jobs.html', {'display_job':Job.objects.get(id=job_id), 'jobs':Job.objects.all().filter(company=Organization.objects.get(user=request.user))})
 
 
 def organizationProfile(request):
