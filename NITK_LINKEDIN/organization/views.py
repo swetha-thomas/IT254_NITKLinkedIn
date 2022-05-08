@@ -144,7 +144,12 @@ def organizationJob(request):
     # form = dict(request.POST)
     # print(form)
   jobs=Job.objects.all().filter(company=Organization.objects.get(user=request.user))
-  return render(request, 'organization_jobs.html',{'jobs':jobs})
+  organization=Organization.objects.get(user=request.user)
+  return render(request, 'organization_jobs.html',{
+    'orgName': organization.org_name,
+    'organizationProfilePic': organization.profile_pic,
+    'jobs':jobs,
+    })
 
 
 def deleteJob(request, job_id):
