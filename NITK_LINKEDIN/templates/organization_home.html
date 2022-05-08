@@ -323,7 +323,13 @@
       <section class="jobs-section">
         <p class="header-secondary">Current Job Vacancies</p>
         <ul class="job-list">
+          {% for job in jobs_of_company %}
           <li class="job">
+            <p class="job-title">{{job.job_name}}</p>
+            <p class="created-since">{{job.posted_on|get_date_but_not_time}}</p>
+          </li>
+          {% endfor %}
+          <!-- <li class="job">
             <p class="job-title">job-title 1</p>
             <p class="created-since">Dec 2021</p>
           </li>
@@ -362,7 +368,7 @@
           <li class="job">
             <p class="job-title">job-title 5</p>
             <p class="created-since">Jan 2020</p>
-          </li>
+          </li> -->
         </ul>
       </section>
     </article>

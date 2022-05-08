@@ -63,6 +63,7 @@ def organizationHome(request):
     'marks': past_7_years[0]['marks'],
     'num_of_years': len(past_7_years),
     'past_years': past_7_years,
+    'jobs_of_company': jobs_of_company,
   })
 
 
@@ -179,3 +180,7 @@ def div( value, arg ):
         if arg: return value / arg
     except: pass
     return ''
+  
+@register.filter
+def get_date_but_not_time(value):
+  return str(value).strip().split(" ")[0]
