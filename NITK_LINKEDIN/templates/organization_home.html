@@ -118,42 +118,6 @@
     <!-- <article> -->
     <!-- <div class="container"> -->
     <header class="logo-and-info-box">
-      <div class="info-box">
-        <ul class="info-list">
-          <li>
-            <strong>
-              <span>Avg CGPA of batch of {{past_years.0.year_number}}: </span>
-            </strong>
-            <span>{{avgCGPAOfStudents}}</span>
-          </li>
-          <li>
-            <strong>
-              <span
-                >Number of students in batch of {{past_years.0.year_number}}:
-              </span>
-            </strong>
-            <span>{{numOfStudentsInBatch}}</span>
-          </li>
-          <li>
-            <strong>
-              <span>Number of students in organization from NITK: </span>
-            </strong>
-            <span>{{numOfStudentsFromCollegeInOrg}}</span>
-          </li>
-          <li>
-            <ul>
-              {% for key, value in marks.items %} {% if key != '' %}
-              <li>
-                <strong>
-                  <span>Average CGPA of {{key}}: </span>
-                </strong>
-                <span>{{value}}</span>
-              </li>
-              {% endif %} {% endfor %}
-            </ul>
-          </li>
-        </ul>
-      </div>
       <table
         class="charts-css column show-heading show-labels show-primary-axis show-data-axes show-10-secondary-axes"
         id="my-chart"
@@ -320,6 +284,42 @@
           </li>
         </ul>
       </section> -->
+      <div class="info-box">
+        <ul class="info-list">
+          <li>
+            <strong>
+              <span>Avg CGPA of batch of {{past_years.0.year_number}}: </span>
+            </strong>
+            <span>{{avgCGPAOfStudents}}</span>
+          </li>
+          <li>
+            <strong>
+              <span
+                >Number of students in batch of {{past_years.0.year_number}}:
+              </span>
+            </strong>
+            <span>{{numOfStudentsInBatch}}</span>
+          </li>
+          <li>
+            <strong>
+              <span>Number of students in organization from NITK: </span>
+            </strong>
+            <span>{{numOfStudentsFromCollegeInOrg}}</span>
+          </li>
+          <li>
+            <ul class="cgpa-of-branches-list">
+              {% for key, value in marks.items %} {% if key != '' %}
+              <li>
+                <strong>
+                  <span>Average CGPA of {{key}}: </span>
+                </strong>
+                <span>{{value}}</span>
+              </li>
+              {% endif %} {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
       <section class="jobs-section">
         <p class="header-secondary">Current Job Vacancies</p>
         <ul class="job-list">
@@ -329,46 +329,6 @@
             <p class="created-since">{{job.posted_on|get_date_but_not_time}}</p>
           </li>
           {% endfor %}
-          <!-- <li class="job">
-            <p class="job-title">job-title 1</p>
-            <p class="created-since">Dec 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 2</p>
-            <p class="created-since">Nov 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 3</p>
-            <p class="created-since">May 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 4</p>
-            <p class="created-since">Jan 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 5</p>
-            <p class="created-since">Jan 2020</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 1</p>
-            <p class="created-since">Dec 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 2</p>
-            <p class="created-since">Nov 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 3</p>
-            <p class="created-since">May 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 4</p>
-            <p class="created-since">Jan 2021</p>
-          </li>
-          <li class="job">
-            <p class="job-title">job-title 5</p>
-            <p class="created-since">Jan 2020</p>
-          </li> -->
         </ul>
       </section>
     </article>

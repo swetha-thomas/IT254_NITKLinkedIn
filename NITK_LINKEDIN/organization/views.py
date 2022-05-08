@@ -143,7 +143,7 @@ def organizationJob(request):
     job.save()
     # form = dict(request.POST)
     # print(form)
-    organization=Organization.objects.get(user=request.user)
+  organization=Organization.objects.get(user=request.user)
   jobs=Job.objects.all().filter(company=Organization.objects.get(user=request.user))
   return render(request, 'organization_jobs.html',{
     'jobs':jobs, 'role':'create', 
