@@ -9,6 +9,7 @@ from django.http import QueryDict
 
 def studentHome(request):
   student = Student.objects.get(user=request.user)
+  # print(student.profile_pic.url)
   return render(request, 'student_home.html', {
     'studentFirstName': student.first_name,
     'studentLastName': student.last_name,

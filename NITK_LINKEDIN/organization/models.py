@@ -15,7 +15,7 @@ class Organization(models.Model):
   contact_no = models.CharField(max_length= 20, null=True, blank=True, default="")
   company_desc = models.CharField(max_length= 200, null=True, blank=True, default="")
   num_alumni = models.IntegerField(null=True, blank=True, default=0)
-  profile_pic = models.ImageField(upload_to='org_profile_uploads/', null=True, blank=True, default="default_org_profile.jpeg")
+  profile_pic = models.ImageField(upload_to='org_profile_uploads/', null=True, blank=True, default="org_profile_uploads/default_org_profile.png")
 
   def __str__(self):
     return self.org_name

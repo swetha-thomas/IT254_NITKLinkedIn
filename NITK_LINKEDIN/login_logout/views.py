@@ -85,7 +85,7 @@ def register(request):
         user.save()
         student = Student(user=user, first_name=fullName[0], last_name=fullName[-1]);
         student.save()
-        messages.info("Successfully Registered!!")
+        messages.info(request, "Successfully Registered!!")
         return redirect('login')
     else:
       username = request.POST['username'].strip()
