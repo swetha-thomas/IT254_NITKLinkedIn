@@ -41,7 +41,7 @@
 					<ul class="nav navbar-nav">
 						<li class="nav-item dropdown active">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{% static 'img/user_pic.jpeg' %}" class="avatar" alt="Avatar"> Organisation Name <b class="caret"></b></a>
+                        <img src="{% static 'img/user_pic.jpeg' %}" class="avatar" alt="Avatar">{{ orgName }} <b class="caret"></b></a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<!-- <li><a href="organization_homepage.html"><i class="fa fa-user-o"></i>Profile</a></li>
 								<li><hr class="dropdown-divider"></li> -->
@@ -55,50 +55,41 @@
 
 								
 		<div class="mb-3 ms-3 ps-2 pe-2 create-button">
-			<button type="button" class="btn btn-primary" id="create-new-job-btn">+ Create</button>
+			<form action="{% url 'organizationJob' %}" method='get'>
+				{% csrf_token%}
+				<button type="submit" class="btn btn-primary" id="create-new-job-btn">+ Create</button>
+			</form>
 		</div>
 		
 		<div class="grid-for-layout">
+			{% if role == 'create' %}
 			<div id="left-side" class="mt-2 create-job-post">
 				<form action="" class="form-horizontal" method="post">
 					{% csrf_token %}
 					<div class="">
 						<h4 class="ms-3 me-3">Create a new Job Opening for NITK Students</h4>
 					</div>
-					
 					<span class="ms-3 me-3" id="invalid-input"></span>
 					
+
 					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Level</label>
 						<select id="job-type" name="job_level" class="form-select" aria-label="Default select example" required>
-							{% comment %} <option selected value="Job Level">Job Level</option> {% endcomment %}
 							<option selected value="Internship">Internship</option>
-							{% comment %} <option value="Internship (Part Time)">Internship (Part Time)</option> {% endcomment %}
 							<option value="Job">Job</option>
 							<option value="Freelance">Freelance</option>
-							
-							{% comment %} <option value="Job (Part Time)">Job (Part Time)</option> {% endcomment %}
 						</select>
 					</div>
 
 					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Type</label>
 						<select id="job-type" name="job_type" class="form-select" aria-label="Default select example" required>
-							{% comment %} <option selected value="Job Type">Job Type</option> {% endcomment %}
 							<option value="Part-Time">Part-Time</option>
 							<option selected value="Full-Time">Full-Time</option>
 						</select>
 					</div>
 
 					<div class="form-control mb-4">
-						<!-- <select class="form-select" aria-label="Default select example">
-							<option selected>Job Role</option>
-							<option value="1">Software Development Engineer (SDE)</option>
-							<option value="2">Digital Media & Content Strategist</option>
-							<option value="3">Business Analyst</option>
-							<option value="4">Product Manager</option>
-							if other is selected, create span tag to fill in the job role
-							<option value="5">Other</option> <span class="other"></span>
-						</select> -->
-						
 						<label for="exampleDataList" class="form-label">Job Role</label>
 						<input type="text" name="job_name" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required value="{{display_job.job_name}}">
 						<datalist id="datalistOptions">
@@ -115,8 +106,8 @@
 					</div>
 
 					<div class="form-control mt-4 mb-4">
+						<label for="exampleDataList" class="form-label">Onsite/Remote</label>
 						<select id="job-type" name="onsite_remote" class="form-select" aria-label="Default select example" required>
-							{% comment %} <option selected value="On-Site / Remote">Job Type</option> {% endcomment %}
 							<option value="On-Site">On-Site</option>
 							<option selected value="Remote">Remote</option>
 						</select>
@@ -129,7 +120,7 @@
 									
 					<div class="form-control mt-4 mb-4">
 						<label for="job-desc" class="form-label">Job Description</label>
-						<textarea id="job-desc" rows="10" class="form-control" name="job_description" placeholder="About the Job" required>{{display_job.job_name}}</textarea>
+						<textarea id="job-desc" rows="10" class="form-control" name="job_description" placeholder="About the Job" required></textarea>
 					</div>		
 									
 					<div class="form-control mt-4 mb-4">
@@ -142,7 +133,146 @@
 					</div>
 				</form>
 			</div>
-							
+			{% endif %}
+
+			{% if role == 'edit' %}
+			<div id="left-side" class="mt-2 create-job-post">
+				<form action="" class="form-horizontal" method="post">
+					{% csrf_token %}
+					<div class="">
+						<h4 class="ms-3 me-3">Edit Job Opening for NITK Students</h4>
+					</div>
+					<span class="ms-3 me-3" id="invalid-input"></span>
+					
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Level</label>
+						<select name="job_level" id="job_level" class="form-select" aria-label="Default select example" required>
+							<option value="{{ job_level_list | first }}" selected>{{ job_level_list | first }}</option>
+							{% for row in job_level_list %}
+							{% if not forloop.first %}
+							<option value="{{row}}">{{ row }}</option>
+							{% endif %}
+							{% endfor %}
+						  </select>
+					</div>
+
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Type</label>
+						<select name="job_type" id="job_type" class="form-select" aria-label="Default select example" required>
+							<option value="{{ job_type_list | first }}" selected>{{ job_type_list | first }}</option>
+							{% for row in job_type_list %}
+							{% if not forloop.first %}
+							<option value="{{row}}">{{ row }}</option>
+							{% endif %}
+							{% endfor %}
+						  </select>
+					</div>
+
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Role</label>
+						<input type="text" name="job_name" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required value="{{display_job.job_name}}">
+						<datalist id="datalistOptions">
+							<option value="{{ job_name_list | first }}" selected>{{ job_name_list | first }}</option>
+							{% for row in job_name_list %}
+							{% if not forloop.first %}
+							<option value="{{row}}">{{ row }}</option>
+							{% endif %}
+							{% endfor %}
+						</datalist>
+                	</div>
+
+					<div class="qualification-container form-control">
+						<label for="qualification" class="form-label">Qualification</label>
+						<input type="text" class="form-control" value="{{display_job.qualification}}" name="qualification" id="qualification" placeholder="Who can apply?" required>
+					</div>
+
+					<div class="form-control mt-4 mb-4">
+						<label for="exampleDataList" class="form-label">Onsite/Remote</label>
+						<select name="onsite_remote" id="onsite_remote" class="form-select" aria-label="Default select example" required>
+							<option value="{{ onsite_remote_list | first }}" selected>{{ onsite_remote_list | first }}</option>
+							{% for row in onsite_remote_list %}
+							{% if not forloop.first %}
+							<option value="{{row}}">{{ row }}</option>
+							{% endif %}
+							{% endfor %}
+						  </select>
+					</div>
+
+					<div class="form-control mt-4">
+						<label for="location" class="form-label">Location</label>
+						<input type="text" class="form-control" value="{{display_job.location_of_work}}" name="location_of_work" id="location" placeholder="Location">
+					</div>
+									
+					<div class="form-control mt-4 mb-4">
+						<label for="job-desc" class="form-label">Job Description</label>
+						<textarea id="job-desc" rows="10" class="form-control" name="job_description" placeholder="About the Job" required>{{display_job.job_description}}</textarea>
+					</div>		
+									
+					<div class="form-control mt-4 mb-4">
+						<label for="skills-required" class="form-label">Skills Required</label>
+						<textarea name="skills_required" class="form-control" id="skills-required" cols="30" rows="5" placeholder="Mention the pre-requistes for the job" required>{{display_job.skills_required}}</textarea>
+					</div>
+									
+					<div class="buttons mb-4">
+						<button type="submit" class="btn btn-primary ms-3" id="postbtn">Update</button>
+					</div>
+				</form>
+			</div>
+			{% endif %}
+			
+			{% if role == 'view' %}
+			<div id="left-side" class="mt-2 create-job-post">
+				<form action="" class="form-horizontal" method="post">
+					{% csrf_token %}
+					<div class="">
+						<h4 class="ms-3 me-3">View Job Opening for NITK Students</h4>
+					</div>
+					<span class="ms-3 me-3" id="invalid-input"></span>
+					
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Level</label>
+						<input type="text" name="job_level" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." readonly value="{{display_job.job_level}}">
+					</div>
+
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Type</label>
+						<input type="text" name="job_type" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." readonly value="{{display_job.job_type}}">
+					</div>
+
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Job Role</label>
+						<input type="text" name="job_role" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." readonly value="{{display_job.job_name}}">
+					</div>
+								
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Qualification</label>
+						<input type="text" name="qualification" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." readonly value="{{display_job.qualification}}">
+					</div>
+
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Onsite/Remote</label>
+						<input type="text" name="onsite_remote" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." readonly value="{{display_job.onsite_remote}}">
+					</div>
+
+					<div class="form-control mb-4">
+						<label for="exampleDataList" class="form-label">Location of Work</label>
+						<input type="text" name="location_of_work" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." readonly value="{{display_job.location_of_work}}">
+					</div>
+									
+					<div class="form-control mt-4 mb-4">
+						<label for="job-desc" class="form-label">Job Description</label>
+						<textarea id="job-desc" rows="10" class="form-control" name="job_description" placeholder="About the Job" required>{{display_job.job_description}}</textarea>
+					</div>		
+									
+					<div class="form-control mt-4 mb-4">
+						<label for="skills-required" class="form-label">Skills Required</label>
+						<textarea name="skills_required" class="form-control" id="skills-required" cols="30" rows="5" placeholder="Mention the pre-requistes for the job" required>{{display_job.skills_required}}</textarea>
+					</div>
+					
+				</form>
+			</div>
+			{% endif %}
+
 			<div class="right-side">
 			<h4 class="ms-3 me-3">Jobs Posted</h4>
 			<div class="jobs-posted">
@@ -158,29 +288,24 @@
 						</div>
 
 						<div class="job-button-group">
-							<form action="{% url 'editJob' job_id=job.id %}" method='post'>
+							<form action="{% url 'editJob' job_id=job.id %}" method='get'>
 								{% csrf_token%}
 								<button type='submit' id='{0}' style ='font-size:17px' class='btn btn-outline-danger border-0 pencil' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-pencil'></i></button>
 							</form>
 							<form action="{% url 'viewJob' job_id=job.id %}" method='post'>
 								{% csrf_token%}
-								<button onclick="viewJob({{display_job.id}})" type='submit' id='{1}' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
+								<button type='submit' id='{1}' style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
 							</form>
 							<form action="{% url 'deleteJob' job_id=job.id %}" method='post'>
 								{% csrf_token%}
 								<button type='submit' id='{2}' style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button>
 							</form>
-							{% comment %} <button type='button' id='{1}' href="{% url 'viewJob' %}" style ='font-size:17px' class='btn btn-outline-danger border-0 view' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-eye'></i></button>
-							<button type='button' id='{2}' href="{% url 'deleteJob' %}" style ='font-size:17px' class='btn btn-outline-danger border-0 delete' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash'></i></button>  {% endcomment %}
 						</div>						
 					</li>
 					{% endfor %}
 				</a>
 				</ul>
 
-			</div>
-			<div class="mt-2 create-job-post">
-				<h1>{display_job.job_name}</h1>
 			</div>
     	</div>
     </div>

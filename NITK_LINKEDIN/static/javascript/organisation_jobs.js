@@ -5,23 +5,8 @@ const saveBtn = document.getElementById("savebtn");
 function validateForm(params) {
     // document.querySelector(".form-horizontal .form-control").childNodes[0].
 }
-createBtn.addEventListener("click", function() {
-    targetDiv.style.display = "block";
-});
 
-function viewJob(id) {
-    document.getElementById("left-side").style.display = "block";
-    // console.log(id);
-    // let all_col = document.getElementsByClassName("job-desc-container")
-    //     // console.log(all_col);
 
-    // for (let i of all_col) {
-    //     console.log(i);
-    //     i.style.display = "none";
-    // }
-    // let job_desc_col = document.getElementById(`job-${id}`);
-    // job_desc_col.style.display = "block";
-}
 
 // function validateForm(params) {
 //     var ddl = document.querySelector("#job-type");

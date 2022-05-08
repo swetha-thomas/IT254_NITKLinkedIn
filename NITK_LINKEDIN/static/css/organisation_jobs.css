@@ -1,8 +1,8 @@
-.create-job-post {
+/* .create-job-post {
     display: inline-block;
-    /* width: 50%; */
+
     justify-content: space-evenly;
-}
+} */
 
 .form-horizontal {
     display: flex;
@@ -30,12 +30,6 @@
     /* background-color: aqua; */
 }
 
-.jobs-saved {
-    /*remove hardcoded value and put %*/
-    height: 400px;
-    /* background: red; */
-}
-
 .create-button {
     width: fit-content;
 }
@@ -54,7 +48,6 @@
 
 .create-job-post {
     grid-row: 1 / -1;
-    display: none;
 }
 a {
     color: #1971c2;
