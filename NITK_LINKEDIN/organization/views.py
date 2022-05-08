@@ -75,8 +75,8 @@ def organizationEditProfile(request):
   elif request.method == 'GET':
     org=Organization.objects.get(user=request.user)
     company_size_list=["0-1 employees","2-10 employees","11-50 employees","51-200 employees","201-500 employees","501-1000 employees","1001-5000 employees","5001-10000 employees","10001+ employees"]
-    if org.company_size==None:
-      company_size_selected = " --Please select an option --"
+    if org.company_size=='':
+      company_size_selected = ""
       company_size_list.insert(0,company_size_selected)
     else:
       company_size_selected = org.company_size
@@ -85,8 +85,8 @@ def organizationEditProfile(request):
       company_size_list.pop(ind+1)
     
     company_type_list=["Educational","Government Agency","Non profit","Partnership","Privately held","Public Company","Self Employeed","Self Owned"]
-    if org.company_type==None:
-      company_type_selected = " --Please select an option --"
+    if org.company_type=='':
+      company_type_selected = ""
       company_type_list.insert(0,company_type_selected)
     else:
       company_type_selected = org.company_type
@@ -130,12 +130,25 @@ def organizationJob(request):
       site_url = Organization.objects.get(user=request.user).website_url,
       qualification = qualification,
       skills_required = skills_required,
-      posted_on = datetime.datetime.now()
+      posted_on = datetime.now().replace(tzinfo=None)
     )
     job.save()
     # form = dict(request.POST)
     # print(form)
-  return render(request, 'organization_jobs.html')
+  jobs=Job.objects.all().filter(company=Organization.objects.get(user=request.user))
+  return render(request, 'organization_jobs.html',{'jobs':jobs})
+
+
+def deleteJob(request):
+  print(request)
+  return redirect('organizationJob')
+
+def editJob(request):
+  return redirect('organizationJob')
+
+def viewJob(request):
+  return redirect('organizationJob')
+
 
 def organizationProfile(request):
   org=Organization.objects.get(user=request.user)
