@@ -56,7 +56,7 @@ def organizationHome(request):
   return render(request, 'organization_home.html', {
     'orgName': organization.org_name,
     'organizationProfilePic': organization.profile_pic,
-    'numOfStudentsInBatch': number_of_students_of_this_year,
+    'numOfStudentsInBatch': past_7_years[0]['num_students'],
     'numOfStudentsFromCollegeInOrg': organization.num_alumni,
     'avgCGPAOfStudents': past_7_years[0]['avg_cgpa'],
     'branches': past_7_years[0]['branches'],
