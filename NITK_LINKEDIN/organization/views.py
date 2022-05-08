@@ -23,7 +23,7 @@ def organizationHome(request):
   for i in range(7):
     past_7_years[i] = {'year_number': date.today().year - i}
     
-    if len(Student.objects.all().filter(year_of_pass_out=date.today().year-i))==0 or i != 0:
+    if i != 0 or len(Student.objects.all().filter(year_of_pass_out=date.today().year-i))==0:
       past_7_years[i]['avg_cgpa'] = 0.00
       past_7_years[i]['branches'] = ['']
       past_7_years[i]['marks'] = {'': 0.00}
