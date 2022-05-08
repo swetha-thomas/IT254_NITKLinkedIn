@@ -303,7 +303,7 @@ a:active {
 #my-chart.column {
   height: 20rem;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .company-logo {
@@ -439,4 +439,8 @@ a:active {
   --data-axes-color: rgba(0, 0, 0, 0.15);
   --data-axes-style: solid;
   --data-axes-width: 1px;
+}
+
+.cgpa-of-branches-list {
+  list-style: none;
 }

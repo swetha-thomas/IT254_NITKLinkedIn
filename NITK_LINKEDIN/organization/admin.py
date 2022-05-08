@@ -17,7 +17,7 @@ class OrganizationModelAdminConfig(admin.ModelAdmin):
   add_fieldsets = (
     (None, {
       'classes' : ('wide',),
-      'fields' : ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic','num_alumni'),
+      'fields' : ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic', 'num_alumni'),
       }),
   )
 

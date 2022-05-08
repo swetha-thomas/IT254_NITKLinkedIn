@@ -62,3 +62,10 @@
   padding: 0;
   line-height: 30px;
 }
+
+.footer-footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
