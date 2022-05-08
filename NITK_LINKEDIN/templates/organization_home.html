@@ -122,26 +122,34 @@
         <ul class="info-list">
           <li>
             <strong>
-              <span>Avg cgpa of {{branch}}: </span>
+              <span>Avg CGPA of batch of {{past_years.0.year_number}}: </span>
             </strong>
             <span>{{avgCGPAOfStudents}}</span>
           </li>
           <li>
             <strong>
-              <span>Number of Students in NITK: </span>
+              <span
+                >Number of students in batch of {{past_years.0.year_number}}:
+              </span>
             </strong>
-            <span>{{numOfStudentsFromCollege}}</span>
+            <span>{{numOfStudentsInBatch}}</span>
+          </li>
+          <li>
+            <strong>
+              <span>Number of students in organization from NITK: </span>
+            </strong>
+            <span>{{numOfStudentsFromCollegeInOrg}}</span>
           </li>
           <li>
             <ul>
-              {% for key, value in marks.items %}
+              {% for key, value in marks.items %} {% if key != '' %}
               <li>
                 <strong>
                   <span>Average CGPA of {{key}}: </span>
                 </strong>
                 <span>{{value}}</span>
               </li>
-              {% endfor %}
+              {% endif %} {% endfor %}
             </ul>
           </li>
         </ul>
@@ -160,7 +168,9 @@
             <td
               style="--start: 0; --size: {{value|get_item:'avg_cgpa'|div:10}}"
             >
+              {% if value|get_item:'avg_cgpa' != 0.0 %}
               <span class="data"> {{value|get_item:'avg_cgpa'}} </span>
+              {% endif %}
             </td>
           </tr>
           {% endfor %}

@@ -1,9 +1,7 @@
 from django.db import models
-from organization.models import Organization 
-
+from organization.models import Organization
 
 # Create your models here.
-
 class Job(models.Model):
   job_name = models.CharField(max_length=150, null=True, blank=True, default="")
   company = models.ForeignKey(Organization, on_delete=models.CASCADE)

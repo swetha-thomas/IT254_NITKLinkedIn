@@ -21,11 +21,14 @@ def organizationHome(request):
   
   past_7_years = {}
   for i in range(7):
-    if i != 0:
-      continue
     past_7_years[i] = {'year_number': date.today().year - i}
-    # past_7_years[i] = {}
     
+    if len(Student.objects.all().filter(year_of_pass_out=date.today().year-i))==0 or i != 0:
+      past_7_years[i]['avg_cgpa'] = 0.00
+      past_7_years[i]['branches'] = ['']
+      past_7_years[i]['marks'] = {'': 0.00}
+      number_of_students_of_this_year = 0
+      continue
     
     students_of_this_year = Student.objects.all().filter(year_of_pass_out=date.today().year-i)
     branches_of_this_year = students_of_this_year.order_by().values('branch').distinct()
@@ -49,7 +52,8 @@ def organizationHome(request):
   return render(request, 'organization_home.html', {
     'orgName': organization.org_name,
     'organizationProfilePic': organization.profile_pic,
-    'numOfStudentsFromCollege': number_of_students,
+    'numOfStudentsInBatch': number_of_students_of_this_year,
+    'numOfStudentsFromCollegeInOrg': organization.num_alumni,
     'avgCGPAOfStudents': past_7_years[0]['avg_cgpa'],
     'branches': past_7_years[0]['branches'],
     'marks': past_7_years[0]['marks'],
@@ -130,7 +134,7 @@ def organizationJob(request):
       site_url = Organization.objects.get(user=request.user).website_url,
       qualification = qualification,
       skills_required = skills_required,
-      posted_on = datetime.now().replace(tzinfo=None)
+      posted_on = datetime.datetime.now().replace(tzinfo=None)
     )
     job.save()
     # form = dict(request.POST)
