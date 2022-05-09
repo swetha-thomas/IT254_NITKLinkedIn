@@ -11,7 +11,7 @@ class OrganizationModelAdminConfig(admin.ModelAdmin):
   list_display = ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic',)
  
   fieldsets = (
-    (None, {'fields': ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic', 'num_alumni',)}),
+    (None, {'fields': ('user', 'org_name', 'industry', 'website_url', 'company_desc', 'profile_pic','num_alumni')}),
   )
   
   add_fieldsets = (

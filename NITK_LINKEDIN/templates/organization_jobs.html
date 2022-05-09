@@ -98,12 +98,12 @@
 					<div class="form-control mb-4">
 						<label for="exampleDataList" class="form-label">Job Role</label>
 						<input type="text" name="job_name" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required value="{{display_job.job_name}}">
-						<datalist id="datalistOptions">
+						{% comment %} <datalist id="datalistOptions">
 							<option value="Software Development Engineer (SDE)">Software Development Engineer (SDE)</option>
 							<option value="Digital Media & Content Strategist">Digital Media & Content Strategist</option>
 							<option value="Business Analyst">Business Analyst</option>
 							<option value="Product Manager">Product Manager</option>
-						</datalist>
+						</datalist> {% endcomment %}
                 	</div>
 								
 					<div class="qualification-container form-control">
@@ -177,14 +177,14 @@
 					<div class="form-control mb-4">
 						<label for="exampleDataList" class="form-label">Job Role</label>
 						<input type="text" name="job_name" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required value="{{display_job.job_name}}">
-						<datalist id="datalistOptions">
+						{% comment %} <datalist id="datalistOptions">
 							<option value="{{ job_name_list | first }}" selected>{{ job_name_list | first }}</option>
 							{% for row in job_name_list %}
 							{% if not forloop.first %}
 							<option value="{{row}}">{{ row }}</option>
 							{% endif %}
 							{% endfor %}
-						</datalist>
+						</datalist> {% endcomment %}
                 	</div>
 
 					<div class="qualification-container form-control">

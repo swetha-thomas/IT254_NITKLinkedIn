@@ -44,6 +44,7 @@ def organizationHome(request):
     number_of_students_of_this_year = students_of_this_year.count()
     avg_cgpa_of_students_of_this_year = round(students_of_this_year.aggregate(Sum('cgpa'))['cgpa__sum'] / number_of_students_of_this_year, 2)
     marks_of_this_year = {}
+    
     for branch in branches_of_this_year:
       if branch['branch'] not in marks_of_this_year.keys():
         marks_of_this_year[branch['branch']] = 0
@@ -154,12 +155,7 @@ def organizationJob(request):
     # print(form)
   organization=Organization.objects.get(user=request.user)
   jobs=Job.objects.all().filter(company=Organization.objects.get(user=request.user))
-  return render(request, 'organization_jobs.html',{
-    'jobs':jobs, 'role':'create', 
-    'user':request.user,
-    'orgName': organization.org_name,
-    'organizationProfilePic': organization.profile_pic,
-  })
+  return render(request, 'organization_jobs.html', {'jobs':jobs, 'role':'create', 'user':request.user, 'orgName': organization.org_name, 'organizationProfilePic': organization.profile_pic})
 
 
 def deleteJob(request, job_id):
@@ -199,15 +195,15 @@ def editJob(request, job_id):
     job_type_list.insert(0,type_selected)
     job_type_list.pop(ind+1)
   
-  job_name_list=["Software Development Engineer (SDE)", "Digital Media & Content Strategist", "Business Analyst", "Product Manager"]
-  if job_obj.job_name=='':
-    name_selected = ""
-    job_name_list.insert(0,name_selected)
-  else:
-    name_selected = job_obj.job_name
-    ind = job_name_list.index(name_selected)
-    job_name_list.insert(0,name_selected)
-    job_name_list.pop(ind+1)
+  # job_name_list=["Graphic Designer", "Software Development Engineer (SDE)", "Digital Media & Content Strategist", "Business Analyst", "Product Manager"]
+  # if job_obj.job_name=='':
+  #   name_selected = ""
+  #   job_name_list.insert(0,name_selected)
+  # else:
+  #   name_selected = job_obj.job_name
+  #   ind = job_name_list.index(name_selected)
+  #   job_name_list.insert(0,name_selected)
+  #   job_name_list.pop(ind+1)
 
   onsite_remote_list=["On-Site","Remote"]
   if job_obj.onsite_remote=='':
@@ -218,13 +214,13 @@ def editJob(request, job_id):
     ind = onsite_remote_list.index(onsite_remote_selected)
     onsite_remote_list.insert(0,onsite_remote_selected)
     onsite_remote_list.pop(ind+1)
-  return render(request, 'organization_jobs.html', {'display_job':job_obj, 'jobs':Job.objects.all().filter(company=Organization.objects.get(user=request.user)), 'role':'edit', 'job_level_list':job_level_list, 'job_type_list':job_type_list, 'job_name_list':job_name_list, 'onsite_remote_list': onsite_remote_list})
+  return render(request, 'organization_jobs.html', {'display_job':job_obj, 'jobs':Job.objects.all().filter(company=Organization.objects.get(user=request.user)), 'role':'edit', 'job_level_list':job_level_list, 'job_type_list':job_type_list, 'onsite_remote_list': onsite_remote_list})
 
 def viewJob(request, job_id):
   return render(request, 'organization_jobs.html', {'display_job':Job.objects.get(id=job_id), 'jobs':Job.objects.all().filter(company=Organization.objects.get(user=request.user)), 'role':'view'})
 
 def organizationProfile(request):
-  org=Organization.objects.get(user=request.user)
+  org = Organization.objects.get(user=request.user)
   return render(request, 'view_myorg_profile.html', 
       {'orgName':org.org_name, 'industry':org.industry, 'company_size':org.company_size, 
       'company_type': org.company_type, 'locations':org.locations, 'web_url': org.website_url, 
